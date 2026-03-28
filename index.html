@@ -14,13 +14,14 @@
 <div id="cur-ring"></div>
 <div id="prog"></div>
 
-<!-- NAV -->
+<!-- ═══ NAV ═══ -->
 <nav id="nav">
   <a href="#" class="logo">Zo<span>Sync</span></a>
-  <ul class="nav-links" id="navLinks">
+  <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#apps">Zoho Apps</a></li>
+    <li><a href="#industries">Industries</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
@@ -28,7 +29,18 @@
   <div class="burger" id="burger"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- HERO -->
+<!-- Mobile Drawer -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#about" class="drawer-link">About</a>
+  <a href="#services" class="drawer-link">Services</a>
+  <a href="#apps" class="drawer-link">Zoho Apps</a>
+  <a href="#industries" class="drawer-link">Industries</a>
+  <a href="#why" class="drawer-link">Why Us</a>
+  <a href="#testimonials" class="drawer-link">Reviews</a>
+  <a href="#contact" class="drawer-cta drawer-link">Get in Touch</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -36,24 +48,28 @@
   <div class="orb o2"></div>
   <div class="orb o3"></div>
   <div id="particles"></div>
+
   <div class="hero-content">
-    <div class="hero-badge"><span class="dot"></span>Certified Zoho Developer · India</div>
+    <div class="hero-badge"><span class="dot"></span>Certified Zoho Partner · India</div>
     <h1>Expert <em>Zoho</em><br>Solutions for<br>Growing Businesses</h1>
     <p class="hero-sub">I'm Kunwar Pal — Software Engineer & Business Consultant delivering end-to-end Zoho implementation, customisation, and integration that transforms how you work.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-p">Start a Project →</a>
-      <a href="#apps" class="btn-s">Explore Zoho Apps</a>
+      <a href="#industries" class="btn-s">Industries I Serve</a>
     </div>
   </div>
+
   <div class="hero-stats">
-    <div class="stat"><div class="snum" data-count="30">0<span>+</span></div><div class="slabel">Projects</div></div>
-    <div class="stat"><div class="snum" data-count="4">0<span>+</span></div><div class="slabel">Years Exp.</div></div>
-    <div class="stat"><div class="snum" data-count="50">0<span>+</span></div><div class="slabel">Clients</div></div>
+    <div class="stat"><div class="snum" data-count="50">0<span>+</span></div><div class="slabel">Zoho Apps</div></div>
+    <div class="stat"><div class="snum" data-count="8">0<span>+</span></div><div class="slabel">Years Exp.</div></div>
+    <div class="stat"><div class="snum" data-count="200">0<span>+</span></div><div class="slabel">Clients</div></div>
+    <div class="stat"><div class="snum" data-count="12">0<span>+</span></div><div class="slabel">Industries</div></div>
   </div>
+
   <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
-<!-- ABOUT -->
+<!-- ═══ ABOUT ═══ -->
 <section id="about">
   <div class="about-grid">
     <div class="reveal fl">
@@ -61,16 +77,16 @@
         <div class="av-wrap">
           <div class="av-icon">KP</div>
           <div class="av-name">Kunwar Pal</div>
-          <div class="av-title">Software Engineer & Business `</div>
+          <div class="av-title">Software Engineer & Business Consultant</div>
         </div>
-        <div class="about-corner"><span>✅</span>Zoho Certified Developer</div>
+        <div class="about-corner"><span>✅</span>Zoho Certified Partner</div>
       </div>
     </div>
     <div class="reveal fr">
       <div class="sec-lbl">About Me</div>
       <h2 class="sec-title">Your Dedicated Zoho Expert</h2>
       <div class="about-text">
-        <p>I'm Kunwar Pal — a software engineer turned business consultant with a deep specialisation in the Zoho ecosystem. I help startups, SMEs, and enterprises implement, customise, and integrate Zoho's powerful suite.</p>
+        <p>I'm Kunwar Pal — a software engineer turned business consultant with a deep specialisation in the Zoho ecosystem, helping startups, SMEs, and enterprises across India implement, customise, and integrate Zoho's powerful suite.</p>
         <p>My dual background means I don't just set up software — I architect solutions aligned with your business goals, improve workflows, and deliver measurable ROI.</p>
         <p>From a single CRM deployment to a full Zoho One rollout with custom automation, I handle it all with precision and care.</p>
       </div>
@@ -79,7 +95,7 @@
         <span class="chip">Zoho One</span>
         <span class="chip">Deluge Scripting</span>
         <span class="chip">API Integration</span>
-        <span class="chip">Business Process Design</span>
+        <span class="chip">Process Design</span>
         <span class="chip">Data Migration</span>
         <span class="chip">Automation</span>
       </div>
@@ -87,7 +103,7 @@
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ═══ SERVICES ═══ -->
 <section id="services">
   <div class="svc-intro reveal">
     <div><div class="sec-lbl">What I Do</div><h2 class="sec-title">Consulting Services</h2></div>
@@ -96,17 +112,17 @@
   <div class="svc-grid stag">
     <div class="svc-card"><div class="svc-icon">⚙️</div><h3>Zoho Implementation & Setup</h3><p>Full configuration of Zoho apps — from CRM pipelines to Zoho Books, done right the first time.</p><span class="svc-tag">Most Popular</span></div>
     <div class="svc-card"><div class="svc-icon">🎨</div><h3>Customisation & Development</h3><p>Custom modules, Deluge scripting, workflows, buttons, and functions built around your business logic.</p><span class="svc-tag">Advanced</span></div>
-    <div class="svc-card"><div class="svc-icon">🔗</div><h3>Integration Services</h3><p>Connect Zoho with WhatsApp, payment gateways, ERP systems, websites, and 1000+ apps via Zoho Flow & APIs.</p><span class="svc-tag">API & Webhooks</span></div>
+    <div class="svc-card"><div class="svc-icon">🔗</div><h3>Integration Services</h3><p>Connect Zoho with WhatsApp, payment gateways, ERP systems, and 1000+ apps via Zoho Flow & APIs.</p><span class="svc-tag">API & Webhooks</span></div>
     <div class="svc-card"><div class="svc-icon">🚛</div><h3>Data Migration</h3><p>Clean, accurate migration from Salesforce, HubSpot, Tally, QuickBooks, and legacy systems — zero data loss.</p><span class="svc-tag">Risk-Free</span></div>
-    <div class="svc-card"><div class="svc-icon">🤖</div><h3>Workflow Automation</h3><p>Eliminate repetitive tasks with smart automation — email triggers, approval chains, auto-assignments, multi-step workflows.</p><span class="svc-tag">Time-Saving</span></div>
-    <div class="svc-card"><div class="svc-icon">📊</div><h3>Analytics & Reporting</h3><p>Build executive dashboards and insightful reports in Zoho Analytics that surface KPIs and drive better decisions.</p><span class="svc-tag">Data-Driven</span></div>
-    <div class="svc-card"><div class="svc-icon">🎓</div><h3>Training & Onboarding</h3><p>Tailored user training sessions, SOPs, and onboarding plans so your team confidently adopts Zoho every day.</p><span class="svc-tag">Team Enablement</span></div>
-    <div class="svc-card"><div class="svc-icon">🛡️</div><h3>Ongoing Support & AMC</h3><p>Monthly retainer packages for bug fixes, enhancements, and continuous optimisation as your business evolves.</p><span class="svc-tag">Retainer</span></div>
+    <div class="svc-card"><div class="svc-icon">🤖</div><h3>Workflow Automation</h3><p>Eliminate repetitive tasks with smart automation — email triggers, approval chains, auto-assignments.</p><span class="svc-tag">Time-Saving</span></div>
+    <div class="svc-card"><div class="svc-icon">📊</div><h3>Analytics & Reporting</h3><p>Build executive dashboards in Zoho Analytics that surface KPIs and drive better decisions across teams.</p><span class="svc-tag">Data-Driven</span></div>
+    <div class="svc-card"><div class="svc-icon">🎓</div><h3>Training & Onboarding</h3><p>Tailored user training sessions, SOPs, and onboarding plans so your team confidently adopts Zoho.</p><span class="svc-tag">Team Enablement</span></div>
+    <div class="svc-card"><div class="svc-icon">🛡️</div><h3>Ongoing Support & AMC</h3><p>Monthly retainer packages for bug fixes, enhancements, and continuous optimisation as your business grows.</p><span class="svc-tag">Retainer</span></div>
     <div class="svc-card"><div class="svc-icon">🌐</div><h3>Zoho One Rollouts</h3><p>Full enterprise Zoho One deployment — unifying all departments with seamless cross-app automation.</p><span class="svc-tag">Enterprise</span></div>
   </div>
 </section>
 
-<!-- ZOHO APPS -->
+<!-- ═══ ZOHO APPS ═══ -->
 <section id="apps">
   <div class="reveal">
     <div class="sec-lbl">Zoho Ecosystem</div>
@@ -125,58 +141,241 @@
     <button class="fbtn" onclick="filterApps('ops',this)">Operations</button>
   </div>
   <div class="apps-grid" id="appsGrid">
-    <div class="acard" data-cat="sales"><span class="aemoji">👥</span><div class="aname">Zoho CRM</div><div class="adesc">Customer relationship & sales pipeline management</div><span class="acat">Sales & CRM</span></div>
-    <div class="acard" data-cat="sales"><span class="aemoji">📋</span><div class="aname">Zoho Bigin</div><div class="adesc">Simple CRM pipeline for small businesses</div><span class="acat">Sales & CRM</span></div>
-    <div class="acard" data-cat="sales"><span class="aemoji">📞</span><div class="aname">Zoho SalesIQ</div><div class="adesc">Live chat & visitor tracking on your website</div><span class="acat">Sales & CRM</span></div>
-    <div class="acard" data-cat="sales"><span class="aemoji">📄</span><div class="aname">Zoho Sign</div><div class="adesc">Digital e-signature for contracts & documents</div><span class="acat">Sales & CRM</span></div>
-    <div class="acard" data-cat="sales"><span class="aemoji">💼</span><div class="aname">Zoho CRM Plus</div><div class="adesc">Unified customer experience platform</div><span class="acat">Sales & CRM</span></div>
-    <div class="acard" data-cat="sales"><span class="aemoji">📅</span><div class="aname">Zoho Bookings</div><div class="adesc">Appointment scheduling & booking management</div><span class="acat">Sales & CRM</span></div>
-    <div class="acard" data-cat="finance"><span class="aemoji">📒</span><div class="aname">Zoho Books</div><div class="adesc">Online accounting software for SMEs</div><span class="acat">Finance</span></div>
-    <div class="acard" data-cat="finance"><span class="aemoji">🧾</span><div class="aname">Zoho Invoice</div><div class="adesc">Professional invoicing, free for freelancers</div><span class="acat">Finance</span></div>
-    <div class="acard" data-cat="finance"><span class="aemoji">🏦</span><div class="aname">Zoho Payroll</div><div class="adesc">Payroll processing & salary management</div><span class="acat">Finance</span></div>
-    <div class="acard" data-cat="finance"><span class="aemoji">💳</span><div class="aname">Zoho Expense</div><div class="adesc">Employee expense tracking & approval</div><span class="acat">Finance</span></div>
-    <div class="acard" data-cat="finance"><span class="aemoji">📦</span><div class="aname">Zoho Inventory</div><div class="adesc">Stock, orders, and warehouse management</div><span class="acat">Finance</span></div>
-    <div class="acard" data-cat="finance"><span class="aemoji">🛒</span><div class="aname">Zoho Commerce</div><div class="adesc">Build and manage your online store</div><span class="acat">Finance</span></div>
-    <div class="acard" data-cat="finance"><span class="aemoji">🏷️</span><div class="aname">Zoho Subscriptions</div><div class="adesc">Recurring billing & subscription management</div><span class="acat">Finance</span></div>
-    <div class="acard" data-cat="hr"><span class="aemoji">🧑‍💼</span><div class="aname">Zoho People</div><div class="adesc">HR management, attendance & leave tracking</div><span class="acat">HR & People</span></div>
-    <div class="acard" data-cat="hr"><span class="aemoji">🎯</span><div class="aname">Zoho Recruit</div><div class="adesc">Applicant tracking & hiring pipeline</div><span class="acat">HR & People</span></div>
+    <div class="acard" data-cat="sales"><span class="aemoji">👥</span><div class="aname">Zoho CRM</div><div class="adesc">Sales pipeline management</div><span class="acat">Sales & CRM</span></div>
+    <div class="acard" data-cat="sales"><span class="aemoji">📋</span><div class="aname">Zoho Bigin</div><div class="adesc">Simple CRM for small teams</div><span class="acat">Sales & CRM</span></div>
+    <div class="acard" data-cat="sales"><span class="aemoji">📞</span><div class="aname">Zoho SalesIQ</div><div class="adesc">Live chat & visitor tracking</div><span class="acat">Sales & CRM</span></div>
+    <div class="acard" data-cat="sales"><span class="aemoji">📄</span><div class="aname">Zoho Sign</div><div class="adesc">Digital e-signatures</div><span class="acat">Sales & CRM</span></div>
+    <div class="acard" data-cat="sales"><span class="aemoji">💼</span><div class="aname">Zoho CRM Plus</div><div class="adesc">Unified customer experience</div><span class="acat">Sales & CRM</span></div>
+    <div class="acard" data-cat="sales"><span class="aemoji">📅</span><div class="aname">Zoho Bookings</div><div class="adesc">Appointment scheduling</div><span class="acat">Sales & CRM</span></div>
+    <div class="acard" data-cat="finance"><span class="aemoji">📒</span><div class="aname">Zoho Books</div><div class="adesc">Online accounting software</div><span class="acat">Finance</span></div>
+    <div class="acard" data-cat="finance"><span class="aemoji">🧾</span><div class="aname">Zoho Invoice</div><div class="adesc">Professional invoicing</div><span class="acat">Finance</span></div>
+    <div class="acard" data-cat="finance"><span class="aemoji">🏦</span><div class="aname">Zoho Payroll</div><div class="adesc">Payroll & salary management</div><span class="acat">Finance</span></div>
+    <div class="acard" data-cat="finance"><span class="aemoji">💳</span><div class="aname">Zoho Expense</div><div class="adesc">Expense tracking & approval</div><span class="acat">Finance</span></div>
+    <div class="acard" data-cat="finance"><span class="aemoji">📦</span><div class="aname">Zoho Inventory</div><div class="adesc">Stock & warehouse management</div><span class="acat">Finance</span></div>
+    <div class="acard" data-cat="finance"><span class="aemoji">🛒</span><div class="aname">Zoho Commerce</div><div class="adesc">Online store management</div><span class="acat">Finance</span></div>
+    <div class="acard" data-cat="finance"><span class="aemoji">🏷️</span><div class="aname">Zoho Subscriptions</div><div class="adesc">Recurring billing management</div><span class="acat">Finance</span></div>
+    <div class="acard" data-cat="hr"><span class="aemoji">🧑‍💼</span><div class="aname">Zoho People</div><div class="adesc">HR, attendance & leave</div><span class="acat">HR & People</span></div>
+    <div class="acard" data-cat="hr"><span class="aemoji">🎯</span><div class="aname">Zoho Recruit</div><div class="adesc">Applicant tracking & hiring</div><span class="acat">HR & People</span></div>
     <div class="acard" data-cat="hr"><span class="aemoji">📈</span><div class="aname">Zoho Backstage</div><div class="adesc">Event management platform</div><span class="acat">HR & People</span></div>
-    <div class="acard" data-cat="hr"><span class="aemoji">🏆</span><div class="aname">Zoho Connect</div><div class="adesc">Internal social intranet for teams</div><span class="acat">HR & People</span></div>
-    <div class="acard" data-cat="marketing"><span class="aemoji">📧</span><div class="aname">Zoho Campaigns</div><div class="adesc">Email marketing with automation & analytics</div><span class="acat">Marketing</span></div>
-    <div class="acard" data-cat="marketing"><span class="aemoji">📣</span><div class="aname">Zoho Social</div><div class="adesc">Social media scheduling & monitoring</div><span class="acat">Marketing</span></div>
-    <div class="acard" data-cat="marketing"><span class="aemoji">🌐</span><div class="aname">Zoho Sites</div><div class="adesc">Website builder with drag & drop editor</div><span class="acat">Marketing</span></div>
-    <div class="acard" data-cat="marketing"><span class="aemoji">📝</span><div class="aname">Zoho Forms</div><div class="adesc">Online form builder & data collection</div><span class="acat">Marketing</span></div>
-    <div class="acard" data-cat="marketing"><span class="aemoji">📊</span><div class="aname">Zoho Survey</div><div class="adesc">Online surveys, polls & feedback</div><span class="acat">Marketing</span></div>
-    <div class="acard" data-cat="marketing"><span class="aemoji">🎰</span><div class="aname">Zoho PageSense</div><div class="adesc">Conversion optimisation & A/B testing</div><span class="acat">Marketing</span></div>
-    <div class="acard" data-cat="marketing"><span class="aemoji">🔔</span><div class="aname">Zoho MarketingHub</div><div class="adesc">Full marketing automation suite</div><span class="acat">Marketing</span></div>
-    <div class="acard" data-cat="support"><span class="aemoji">🎫</span><div class="aname">Zoho Desk</div><div class="adesc">Helpdesk ticketing & customer support</div><span class="acat">Support</span></div>
-    <div class="acard" data-cat="support"><span class="aemoji">🤝</span><div class="aname">Zoho Assist</div><div class="adesc">Remote support & screen sharing</div><span class="acat">Support</span></div>
-    <div class="acard" data-cat="support"><span class="aemoji">🤖</span><div class="aname">Zoho SalesIQ Bots</div><div class="adesc">AI chatbots for 24/7 customer support</div><span class="acat">Support</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">💬</span><div class="aname">Zoho Cliq</div><div class="adesc">Team messaging, channels & video calls</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">📬</span><div class="aname">Zoho Mail</div><div class="adesc">Ad-free professional business email hosting</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">📁</span><div class="aname">Zoho WorkDrive</div><div class="adesc">Team file storage & collaboration drive</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">✍️</span><div class="aname">Zoho Writer</div><div class="adesc">Online word processor with collaboration</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">📊</span><div class="aname">Zoho Sheet</div><div class="adesc">Collaborative online spreadsheets</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">🖼️</span><div class="aname">Zoho Show</div><div class="adesc">Online presentation builder</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">🗓️</span><div class="aname">Zoho Calendar</div><div class="adesc">Team scheduling & calendar sync</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">📋</span><div class="aname">Zoho Notebook</div><div class="adesc">Note-taking app with rich media support</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="collab"><span class="aemoji">🎥</span><div class="aname">Zoho Meeting</div><div class="adesc">Online meetings & webinar hosting</div><span class="acat">Collaboration</span></div>
-    <div class="acard" data-cat="dev"><span class="aemoji">🏗️</span><div class="aname">Zoho Creator</div><div class="adesc">Low-code custom application builder</div><span class="acat">Dev & IT</span></div>
-    <div class="acard" data-cat="dev"><span class="aemoji">🔄</span><div class="aname">Zoho Flow</div><div class="adesc">No-code app integration & automation</div><span class="acat">Dev & IT</span></div>
-    <div class="acard" data-cat="dev"><span class="aemoji">🔌</span><div class="aname">Zoho Catalyst</div><div class="adesc">Serverless cloud development platform</div><span class="acat">Dev & IT</span></div>
-    <div class="acard" data-cat="dev"><span class="aemoji">🛠️</span><div class="aname">Zoho Cliq Bots</div><div class="adesc">Custom bots & extensions for teams</div><span class="acat">Dev & IT</span></div>
-    <div class="acard" data-cat="dev"><span class="aemoji">🌍</span><div class="aname">Zoho One</div><div class="adesc">All 45+ apps in one subscription</div><span class="acat">Dev & IT</span></div>
-    <div class="acard" data-cat="ops"><span class="aemoji">📌</span><div class="aname">Zoho Projects</div><div class="adesc">Project management with Gantt charts</div><span class="acat">Operations</span></div>
-    <div class="acard" data-cat="ops"><span class="aemoji">🏃</span><div class="aname">Zoho Sprints</div><div class="adesc">Agile project management for dev teams</div><span class="acat">Operations</span></div>
-    <div class="acard" data-cat="ops"><span class="aemoji">📉</span><div class="aname">Zoho Analytics</div><div class="adesc">BI dashboards & advanced reporting</div><span class="acat">Operations</span></div>
-    <div class="acard" data-cat="ops"><span class="aemoji">🔧</span><div class="aname">Zoho FSM</div><div class="adesc">Field service management for on-site teams</div><span class="acat">Operations</span></div>
-    <div class="acard" data-cat="ops"><span class="aemoji">🏢</span><div class="aname">Zoho Workplace</div><div class="adesc">Unified workplace productivity suite</div><span class="acat">Operations</span></div>
+    <div class="acard" data-cat="hr"><span class="aemoji">🏆</span><div class="aname">Zoho Connect</div><div class="adesc">Internal social intranet</div><span class="acat">HR & People</span></div>
+    <div class="acard" data-cat="marketing"><span class="aemoji">📧</span><div class="aname">Zoho Campaigns</div><div class="adesc">Email marketing automation</div><span class="acat">Marketing</span></div>
+    <div class="acard" data-cat="marketing"><span class="aemoji">📣</span><div class="aname">Zoho Social</div><div class="adesc">Social media management</div><span class="acat">Marketing</span></div>
+    <div class="acard" data-cat="marketing"><span class="aemoji">🌐</span><div class="aname">Zoho Sites</div><div class="adesc">Website builder</div><span class="acat">Marketing</span></div>
+    <div class="acard" data-cat="marketing"><span class="aemoji">📝</span><div class="aname">Zoho Forms</div><div class="adesc">Online form builder</div><span class="acat">Marketing</span></div>
+    <div class="acard" data-cat="marketing"><span class="aemoji">📊</span><div class="aname">Zoho Survey</div><div class="adesc">Surveys, polls & feedback</div><span class="acat">Marketing</span></div>
+    <div class="acard" data-cat="marketing"><span class="aemoji">🎰</span><div class="aname">Zoho PageSense</div><div class="adesc">Conversion optimisation</div><span class="acat">Marketing</span></div>
+    <div class="acard" data-cat="marketing"><span class="aemoji">🔔</span><div class="aname">Zoho MarketingHub</div><div class="adesc">Marketing automation suite</div><span class="acat">Marketing</span></div>
+    <div class="acard" data-cat="support"><span class="aemoji">🎫</span><div class="aname">Zoho Desk</div><div class="adesc">Helpdesk ticketing</div><span class="acat">Support</span></div>
+    <div class="acard" data-cat="support"><span class="aemoji">🤝</span><div class="aname">Zoho Assist</div><div class="adesc">Remote support & sharing</div><span class="acat">Support</span></div>
+    <div class="acard" data-cat="support"><span class="aemoji">🤖</span><div class="aname">SalesIQ Bots</div><div class="adesc">AI chatbots for support</div><span class="acat">Support</span></div>
+    <div class="acard" data-cat="collab"><span class="aemoji">💬</span><div class="aname">Zoho Cliq</div><div class="adesc">Team messaging & calls</div><span class="acat">Collaboration</span></div>
+    <div class="acard" data-cat="collab"><span class="aemoji">📬</span><div class="aname">Zoho Mail</div><div class="adesc">Business email hosting</div><span class="acat">Collaboration</span></div>
+    <div class="acard" data-cat="collab"><span class="aemoji">📁</span><div class="aname">Zoho WorkDrive</div><div class="adesc">Team file storage</div><span class="acat">Collaboration</span></div>
+    <div class="acard" data-cat="collab"><span class="aemoji">✍️</span><div class="aname">Zoho Writer</div><div class="adesc">Online word processor</div><span class="acat">Collaboration</span></div>
+    <div class="acard" data-cat="collab"><span class="aemoji">📊</span><div class="aname">Zoho Sheet</div><div class="adesc">Collaborative spreadsheets</div><span class="acat">Collaboration</span></div>
+    <div class="acard" data-cat="collab"><span class="aemoji">🎥</span><div class="aname">Zoho Meeting</div><div class="adesc">Online meetings & webinars</div><span class="acat">Collaboration</span></div>
+    <div class="acard" data-cat="collab"><span class="aemoji">🗓️</span><div class="aname">Zoho Calendar</div><div class="adesc">Team scheduling & sync</div><span class="acat">Collaboration</span></div>
+    <div class="acard" data-cat="dev"><span class="aemoji">🏗️</span><div class="aname">Zoho Creator</div><div class="adesc">Low-code app builder</div><span class="acat">Dev & IT</span></div>
+    <div class="acard" data-cat="dev"><span class="aemoji">🔄</span><div class="aname">Zoho Flow</div><div class="adesc">No-code integration</div><span class="acat">Dev & IT</span></div>
+    <div class="acard" data-cat="dev"><span class="aemoji">🔌</span><div class="aname">Zoho Catalyst</div><div class="adesc">Serverless cloud platform</div><span class="acat">Dev & IT</span></div>
+    <div class="acard" data-cat="dev"><span class="aemoji">🌍</span><div class="aname">Zoho One</div><div class="adesc">All 45+ apps, one plan</div><span class="acat">Dev & IT</span></div>
+    <div class="acard" data-cat="ops"><span class="aemoji">📌</span><div class="aname">Zoho Projects</div><div class="adesc">Project management & Gantt</div><span class="acat">Operations</span></div>
+    <div class="acard" data-cat="ops"><span class="aemoji">🏃</span><div class="aname">Zoho Sprints</div><div class="adesc">Agile project management</div><span class="acat">Operations</span></div>
+    <div class="acard" data-cat="ops"><span class="aemoji">📉</span><div class="aname">Zoho Analytics</div><div class="adesc">BI dashboards & reporting</div><span class="acat">Operations</span></div>
+    <div class="acard" data-cat="ops"><span class="aemoji">🔧</span><div class="aname">Zoho FSM</div><div class="adesc">Field service management</div><span class="acat">Operations</span></div>
     <div class="acard" data-cat="ops"><span class="aemoji">⚖️</span><div class="aname">Zoho Contracts</div><div class="adesc">Contract lifecycle management</div><span class="acat">Operations</span></div>
-    <div class="acard" data-cat="ops"><span class="aemoji">🚚</span><div class="aname">Zoho Logistics</div><div class="adesc">Order fulfillment & shipping management</div><span class="acat">Operations</span></div>
   </div>
 </section>
 
-<!-- WHY -->
+<!-- ═══ INDUSTRIES ═══ -->
+<section id="industries">
+  <div class="ind-head reveal">
+    <div>
+      <div class="sec-lbl">Who I Work With</div>
+      <h2 class="sec-title">Industries I Serve</h2>
+    </div>
+    <p class="r">From real estate to retail, I bring deep domain knowledge and tailored Zoho solutions for every sector's unique challenges and workflows.</p>
+  </div>
+
+  <div class="ind-grid stag">
+
+    <!-- 1. Real Estate -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🏠</div>
+      <div class="ind-body">
+        <h3>Real Estate & Property</h3>
+        <p>Manage leads, property listings, site visits, and follow-ups in Zoho CRM. Automate broker commissions, agreements via Zoho Sign, and post-sales handover workflows.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">CRM</span>
+          <span class="ind-tag">Zoho Sign</span>
+          <span class="ind-tag">Automation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Manufacturing -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🏭</div>
+      <div class="ind-body">
+        <h3>Manufacturing & Production</h3>
+        <p>Track raw material inventory, production orders, vendor payments, and QC processes. Integrate Zoho Inventory + Books for real-time cost visibility across the supply chain.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Inventory</span>
+          <span class="ind-tag">Books</span>
+          <span class="ind-tag">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. E-Commerce -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🛍️</div>
+      <div class="ind-body">
+        <h3>E-Commerce & Retail</h3>
+        <p>Sync your Shopify, WooCommerce, or Amazon store with Zoho Inventory and Books. Automate order fulfilment, returns, customer support tickets, and campaign emails.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Commerce</span>
+          <span class="ind-tag">Inventory</span>
+          <span class="ind-tag">Campaigns</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Healthcare -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🏥</div>
+      <div class="ind-body">
+        <h3>Healthcare & Clinics</h3>
+        <p>Streamline patient intake, appointment scheduling via Zoho Bookings, billing, and follow-up reminders. Build HIPAA-aware workflows that keep patient data secure and organised.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Bookings</span>
+          <span class="ind-tag">CRM</span>
+          <span class="ind-tag">Desk</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Education -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🎓</div>
+      <div class="ind-body">
+        <h3>Education & EdTech</h3>
+        <p>Manage student admissions, fee collection, course enrolments, and faculty workflows. Use Zoho Campaigns for student outreach and Zoho Creator for custom portals.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Creator</span>
+          <span class="ind-tag">Campaigns</span>
+          <span class="ind-tag">Forms</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Financial Services -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">💰</div>
+      <div class="ind-body">
+        <h3>Financial Services & BFSI</h3>
+        <p>Automate loan origination pipelines, client onboarding KYC, and compliance reporting. Connect Zoho CRM with your banking portals and track AUM, policies, and renewals.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">CRM</span>
+          <span class="ind-tag">Analytics</span>
+          <span class="ind-tag">Sign</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. IT & Software -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">💻</div>
+      <div class="ind-body">
+        <h3>IT & Software Companies</h3>
+        <p>Run projects on Zoho Projects, manage support SLAs via Zoho Desk, and track recurring revenue in Zoho Subscriptions. Integrate with Jira, GitHub, and Slack seamlessly.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Projects</span>
+          <span class="ind-tag">Desk</span>
+          <span class="ind-tag">Subscriptions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Logistics & Supply Chain -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🚚</div>
+      <div class="ind-body">
+        <h3>Logistics & Supply Chain</h3>
+        <p>Track shipments, vendor SLAs, and warehouse stock with Zoho Inventory and FSM. Automate delivery notifications via WhatsApp and build real-time fleet dashboards.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Inventory</span>
+          <span class="ind-tag">FSM</span>
+          <span class="ind-tag">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Hospitality & Travel -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🏨</div>
+      <div class="ind-body">
+        <h3>Hospitality & Travel</h3>
+        <p>Automate hotel booking enquiries, guest follow-ups, and feedback collection. Manage travel packages, agent commissions, and post-trip loyalty campaigns through Zoho CRM.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">CRM</span>
+          <span class="ind-tag">Bookings</span>
+          <span class="ind-tag">Campaigns</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Non-Profit & NGO -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🤝</div>
+      <div class="ind-body">
+        <h3>Non-Profit & NGO</h3>
+        <p>Track donor pipelines, grant applications, and volunteer management. Automate donation acknowledgements, compliance reports, and beneficiary outreach programmes.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">CRM</span>
+          <span class="ind-tag">Forms</span>
+          <span class="ind-tag">Campaigns</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Construction & Infrastructure -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">🏗️</div>
+      <div class="ind-body">
+        <h3>Construction & Infrastructure</h3>
+        <p>Manage project timelines, subcontractor payments, material procurement, and site inspection reports. Use Zoho FSM for on-site teams and Creator for custom project portals.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Projects</span>
+          <span class="ind-tag">FSM</span>
+          <span class="ind-tag">Creator</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Professional Services -->
+    <div class="ind-card">
+      <div class="ind-icon-wrap">⚖️</div>
+      <div class="ind-body">
+        <h3>Legal & Professional Services</h3>
+        <p>Manage client matters, time billing, contract lifecycle, and court deadlines. Automate retainer invoices in Zoho Books and secure document exchange via Zoho Sign & WorkDrive.</p>
+        <div class="ind-tags">
+          <span class="ind-tag">Books</span>
+          <span class="ind-tag">Sign</span>
+          <span class="ind-tag">Contracts</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ind-cta-row reveal">
+    <p>Don't see your industry? I work with businesses across many more sectors.</p>
+    <a href="#contact" class="btn-p">Let's Discuss Your Industry →</a>
+  </div>
+</section>
+
+<!-- ═══ WHY ═══ -->
 <section id="why">
   <div class="why-grid">
     <div class="reveal fl">
@@ -191,8 +390,8 @@
     </div>
     <div class="reveal fr">
       <div class="why-vis">
-        <h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:4px">My Process</h4>
-        <p style="font-size:.85rem;color:var(--muted);margin-bottom:20px">How I deliver every project</p>
+        <h4 style="font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:4px">My Process</h4>
+        <p style="font-size:.82rem;color:var(--muted);margin-bottom:18px">How I deliver every project</p>
         <div class="pstep"><div class="pdot">1</div><div class="ptxt">Discovery Call & Business Analysis</div><span class="parr">→</span></div>
         <div class="pstep"><div class="pdot">2</div><div class="ptxt">Solution Design & Roadmap</div><span class="parr">→</span></div>
         <div class="pstep"><div class="pdot">3</div><div class="ptxt">Development & Configuration</div><span class="parr">→</span></div>
@@ -204,9 +403,9 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- ═══ TESTIMONIALS ═══ -->
 <section id="testimonials">
-  <div class="reveal" style="text-align:center;margin-bottom:60px">
+  <div class="reveal" style="text-align:center;margin-bottom:50px">
     <div class="sec-lbl">Client Reviews</div>
     <h2 class="sec-title">What My Clients Say</h2>
   </div>
@@ -229,7 +428,7 @@
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ═══ CONTACT ═══ -->
 <section id="contact">
   <div class="cgrid">
     <div class="reveal fl">
@@ -238,18 +437,37 @@
       <p class="cinfo-p">Ready to transform your business with Zoho? Whether you have a specific project in mind or just want to explore what's possible, I'd love to hear from you.</p>
       <div class="cdet"><div class="cdet-icon">📧</div><div class="cdet-txt"><strong>Email</strong><span>kunwarpal@zosync.in</span></div></div>
       <div class="cdet"><div class="cdet-icon">📱</div><div class="cdet-txt"><strong>WhatsApp / Phone</strong><span>+91 98XXX XXXXX</span></div></div>
-      <div class="cdet"><div class="cdet-icon">📍</div><div class="cdet-txt"><strong>Location</strong><span>India (Remote & On-site available)</span></div></div>
+      <div class="cdet"><div class="cdet-icon">📍</div><div class="cdet-txt"><strong>Location</strong><span>India — Remote & On-site available</span></div></div>
       <div class="cdet"><div class="cdet-icon">⏱️</div><div class="cdet-txt"><strong>Response Time</strong><span>Within 4–6 hours on business days</span></div></div>
     </div>
     <div class="reveal fr">
       <div class="cform">
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:24px">Send Me a Message</h3>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:22px">Send Me a Message</h3>
         <div class="frow">
           <div class="fg"><label>First Name *</label><input type="text" id="fname" placeholder="Rohit"/></div>
           <div class="fg"><label>Last Name *</label><input type="text" id="lname" placeholder="Sharma"/></div>
         </div>
         <div class="fg"><label>Email Address *</label><input type="email" id="email" placeholder="rohit@company.com"/></div>
-        <div class="fg"><label>Phone / WhatsApp</label><input type="text" id="phone" placeholder="+91 98XXX XXXXX"/></div>
+        <div class="fg"><label>Phone / WhatsApp</label><input type="tel" id="phone" placeholder="+91 98XXX XXXXX"/></div>
+        <div class="fg">
+          <label>Industry</label>
+          <select id="industry">
+            <option value="">Select your industry...</option>
+            <option>Real Estate & Property</option>
+            <option>Manufacturing & Production</option>
+            <option>E-Commerce & Retail</option>
+            <option>Healthcare & Clinics</option>
+            <option>Education & EdTech</option>
+            <option>Financial Services & BFSI</option>
+            <option>IT & Software</option>
+            <option>Logistics & Supply Chain</option>
+            <option>Hospitality & Travel</option>
+            <option>Non-Profit & NGO</option>
+            <option>Construction & Infrastructure</option>
+            <option>Legal & Professional Services</option>
+            <option>Other</option>
+          </select>
+        </div>
         <div class="fg">
           <label>Zoho Service Needed</label>
           <select id="service">
@@ -272,25 +490,55 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="ftop">
     <div class="fbrand">
       <a href="#" class="logo">Zo<span style="color:var(--red)">Sync</span></a>
-      <p>Expert Zoho consulting by Kunwar Pal — Software Engineer & Business Consultant. Helping businesses unlock the full power of the Zoho ecosystem.</p>
+      <p>Expert Zoho consulting by Kunwar Pal — Software Engineer & Business Consultant. Helping businesses across India unlock the full power of the Zoho ecosystem.</p>
     </div>
-    <div class="fcol"><h5>Services</h5><ul><li><a href="#services">CRM Implementation</a></li><li><a href="#services">Custom Development</a></li><li><a href="#services">Data Migration</a></li><li><a href="#services">Automation</a></li><li><a href="#services">Training & Support</a></li></ul></div>
-    <div class="fcol"><h5>Zoho Apps</h5><ul><li><a href="#apps">Zoho CRM</a></li><li><a href="#apps">Zoho Books</a></li><li><a href="#apps">Zoho One</a></li><li><a href="#apps">Zoho Creator</a></li><li><a href="#apps">Zoho Desk</a></li></ul></div>
-    <div class="fcol"><h5>Quick Links</h5><ul><li><a href="#about">About Kunwar</a></li><li><a href="#why">Why ZoSync</a></li><li><a href="#testimonials">Client Reviews</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div class="fcol">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#services">CRM Implementation</a></li>
+        <li><a href="#services">Custom Development</a></li>
+        <li><a href="#services">Data Migration</a></li>
+        <li><a href="#services">Workflow Automation</a></li>
+        <li><a href="#services">Training & AMC</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Industries</h5>
+      <ul>
+        <li><a href="#industries">Real Estate</a></li>
+        <li><a href="#industries">Manufacturing</a></li>
+        <li><a href="#industries">E-Commerce</a></li>
+        <li><a href="#industries">Healthcare</a></li>
+        <li><a href="#industries">IT & Software</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#about">About Kunwar</a></li>
+        <li><a href="#apps">Zoho Apps</a></li>
+        <li><a href="#why">Why ZoSync</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
   </div>
   <div class="fbot">
     <span>© 2025 ZoSync by Kunwar Pal. All rights reserved.</span>
-    <span>Built with ❤️ for Zoho-powered businesses</span>
+    <span>Built with ❤️ for Zoho-powered businesses across India</span>
   </div>
 </footer>
 
 <div class="toast" id="toast"><span id="ticon">✅</span><span id="tmsg">Message sent!</span></div>
-<script src="index.js"></script>
 
+<!-- ═══════════════════════════════════════
+   JAVASCRIPT
+═══════════════════════════════════════ -->
+<script src="index.js"></script>
 </body>
 </html>
