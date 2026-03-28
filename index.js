@@ -130,16 +130,63 @@ function filterApps(cat,btn){
 }
 
 /* ── FORM ── */
-function submitForm(){
+async function submitForm(){
   const f=document.getElementById('fname').value.trim();
+  const l=document.getElementById('lname').value.trim();
   const em=document.getElementById('email').value.trim();
   const msg=document.getElementById('message').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const svc=document.getElementById('service').value;
+  const ind=document.getElementById('industry').value;
+
   if(!f||!em||!msg){showToast('Please fill in Name, Email & Message.','⚠️','#c0392b');return}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showToast('Please enter a valid email address.','⚠️','#c0392b');return}
   showToast("Message sent! I'll be in touch within 4–6 hours.",'✅','#1a1a1a');
   ['fname','lname','email','phone','message'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('service').selectedIndex=0;
   document.getElementById('industry').selectedIndex=0;
+
+
+  const body = `Name: ${f} ${l}
+Email: ${em}
+Phone: ${phone}
+Service: ${svc}
+Industry: ${ind}
+
+Message
+${msg}
+  ---`;
+
+  const emailData = {
+        receiverEmail: "atulroy028@gmail.com",
+        subject: "New Contact Form Submission from " + f,
+        message: body
+    };
+
+    try {
+        // Pointing to your local Node.js server
+        const response = await fetch('https://zosync-backend-ecxcjq90v-kunwarpal621311s-projects.vercel.app/api/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(emailData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            console.log('Email sent successfully:', result);
+        } else {
+            console.error('Error sending email:', result.error);
+            // statusDiv.style.color = "red";
+        }
+
+    } catch (error) {
+        console.error('Fetch Error:', error);
+       
+    }
+
 }
 function showToast(msg,icon,bg){
   const t=document.getElementById('toast');
