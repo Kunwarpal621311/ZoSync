@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4LGYNEG4SE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4LGYNEG4SE');
+</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Zoho CRM Expert Implementation – ZoSync by Kunwar Pal</title>
@@ -884,7 +893,7 @@ footer{background:var(--ink);color:rgba(245,240,232,.6);padding:60px 5% 28px}
         <li><a href="#packages">CRM Packages</a></li>
         <li><a href="#results">Results</a></li>
         <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="index.html">← Main Website</a></li>
+        <li><a href="../index.html">← Main Website</a></li>
       </ul>
     </div>
   </div>
@@ -991,15 +1000,33 @@ function animCount(el){
 }
 
 /* FORM */
-function submitForm(){
+async function submitForm(){
   const fn=document.getElementById('fname').value.trim();
   const em=document.getElementById('email').value.trim();
   const ph=document.getElementById('phone').value.trim();
   const msg=document.getElementById('message').value.trim();
+  const ln=document.getElementById('lname').value.trim();
+  const company=document.getElementById('company').value.trim();
+  const currentCrm=document.getElementById('current-crm').value;
+  const teamSize=document.getElementById('team-size').value;
+
   if(!fn||!em||!ph||!msg){showToast('Please fill in all required fields.','⚠️','#c0392b');return}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showToast('Please enter a valid email address.','⚠️','#c0392b');return}
   showToast("Consultation booked! I'll be in touch within 4 hours.",'✅','#1a1a1a');
   document.querySelectorAll('#contact input,#contact select,#contact textarea').forEach(el=>el.value='');
+
+  const body  =`
+    New consultation booking from ${fn} ${ln}
+    Company: ${company}
+    Current CRM: ${currentCrm}
+    Team Size: ${teamSize}
+    Email: ${em}
+    Phone: ${ph}
+    Message: 
+    ${msg}
+  `;
+  // console.log('Email body:', body);
+  await sendmail(body, fn+' '+ln);
 }
 function showToast(msg,icon,bg){
   const t=document.getElementById('toast');
@@ -1007,6 +1034,38 @@ function showToast(msg,icon,bg){
   document.getElementById('ticon').textContent=icon;
   t.style.background=bg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),4500);
+}
+
+async function sendmail(body, fullname){
+   const emailData = {
+        receiverEmail: "atulroy028@gmail.com",
+        subject: "New Contact Form Submission from "+fullname, 
+        message: body
+    };
+
+    try {
+        // Pointing to your local Node.js server
+        const response = await fetch('https://zosync-backend-ecxcjq90v-kunwarpal621311s-projects.vercel.app/api/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(emailData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            console.log('Email sent successfully:', result);
+        } else {
+            console.error('Error sending email:', result.error);
+            // statusDiv.style.color = "red";
+        }
+
+    } catch (error) {
+        console.error('Fetch Error:', error);
+       
+    }
 }
 </script>
 </body>
