@@ -1,0 +1,10 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Prevent bots from wasting time on internal code files
+Disallow: /assets/css/
+Disallow: /assets/js/
+
+# Crucial: The direct link to your sitemap
+Sitemap: https://zosync.in/sitemap.xml
