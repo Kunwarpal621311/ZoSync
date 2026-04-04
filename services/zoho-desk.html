@@ -1207,7 +1207,7 @@ async function submitForm(){
       Message:
       ${msg}
     `;
-  await(emailBody, fn + ' ' + lastname);
+  await sendmail(emailBody, fn + ' ' + lastname);
 }
 async function sendmail(body, fullname){
    const emailData = {
