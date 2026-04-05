@@ -158,7 +158,7 @@ ${msg}
   ---`;
 
   const emailData = {
-        receiverEmail: "atulroy028@gmail.com",
+        receiverEmail: "sales@zosync.in",
         subject: "New Contact Form Submission from " + f,
         message: body
     };
