@@ -16,7 +16,19 @@ body{
   width:100%;
   max-width:100vw;
 }
+.ind-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
 
+.ind-card-link:hover,
+.ind-card-link:focus,
+.ind-card-link:active,
+.ind-card-link:visited {
+  text-decoration: none;
+  color: inherit;
+}
 /* ══════════════════════════════════════════
    CUSTOM CURSOR (desktop only)
 ══════════════════════════════════════════ */

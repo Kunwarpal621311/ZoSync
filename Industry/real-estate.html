@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ZoSync Real Estate – Zoho CRM, Payroll & Portal Integrations for Real Estate | India</title>
+<meta name="description" content="Complete Zoho implementation for real estate companies — CRM for sales, Payroll for agents, Zoho Forms KYC, and custom integration with 99acres, MagicBricks, Housing.com, WhatsApp & Meta Leads."/>
+<meta name="keywords" content="ZoSync, Real Estate CRM India, Zoho CRM for Real Estate Developers, 99acres Zoho Integration, MagicBricks CRM Automation, Housing.com Lead Sync, PropTech India, Real Estate Lead Management System, WhatsApp CRM for Real Estate, Meta Lead Ads Zoho Integration, Real Estate Payroll Automation India, Zoho People for Real Estate, Automated Property Management India, Real Estate Inventory Tracking CRM, Real Estate Sales Funnel Automation, Zoho One for Developers India"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/fevicon.jpeg" type="image/x-icon">
+<style>
+/* ═══════ ROOT / TOKENS ═══════ */
+:root{
+  --ink:#0d0d0d; --cream:#f5f0e8; --white:#fff;
+  --red:#e8333a; --orange:#f36b21; --gold:#c9962c;
+  --muted:#6b6b6b; --border:#e0d8cc; --card:#faf7f2;
+  --dark-card:#111820;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+.sample-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #ffffff;
+  color: #111;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  letter-spacing: 0.4px;
+  z-index: 2;
+}
+/* ═══════ CURSOR ═══════ */
+#cur,#cur-ring{pointer-events:none;position:fixed;border-radius:50%;z-index:99999;transform:translate(-50%,-50%);transition-property:width,height,border-color;transition-duration:.2s}
+#cur{width:12px;height:12px;background:var(--red)}
+#cur-ring{width:40px;height:40px;border:1.5px solid rgba(232,51,58,.4);z-index:99998}
+@media(max-width:1024px){#cur,#cur-ring{display:none}}
+
+/* ═══════ PROGRESS ═══════ */
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:10000;background:linear-gradient(90deg,var(--red),var(--orange));pointer-events:none}
+
+/* ═══════ NAV ═══════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background-color: var(--cream); border-bottom:1px solid var(--border);transition:background .4s,backdrop-filter .4s,border-color .4s,box-shadow .4s,padding .3s}
+nav.scrolled{background:rgba(245,240,232,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--border);box-shadow:0 4px 30px rgba(0,0,0,.07);padding:12px 5%}
+.logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;letter-spacing:-.5px;color:var(--ink);text-decoration:none}
+.logo span{color:var(--red)}
+.logo sub{font-size:.52rem;font-weight:600;color:var(--muted);letter-spacing:.8px;vertical-align:middle;margin-left:3px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:26px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--ink);font-size:.86rem;font-weight:500;position:relative;padding-bottom:3px;white-space:nowrap}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--red);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-back{background:var(--card)!important;border:1px solid var(--border)!important;padding:7px 14px!important;border-radius:50px;color:var(--muted)!important;font-size:.82rem!important}
+.nav-back::after{display:none!important}
+.nav-cta{background:var(--red)!important;color:#fff!important;padding:9px 22px;border-radius:50px;font-weight:600!important;box-shadow:0 4px 16px rgba(232,51,58,.32)}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:#c42830!important;transform:translateY(-2px)!important}
+.burger{display:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;z-index:1001}
+.burger span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;transition:.35s}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.nav-drawer{display:none;position:fixed;inset:0;background:rgba(245,240,232,.98);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:80px 5% 40px}
+.nav-drawer.open{display:flex}
+.nav-drawer a{font-size:1.4rem;font-family:'Playfair Display',serif;font-weight:700;text-decoration:none;color:var(--ink)}
+.nav-drawer a:hover{color:var(--red)}
+.nav-drawer .dc{background:var(--red);color:#fff!important;padding:14px 36px;border-radius:50px;font-family:'DM Sans',sans-serif!important;font-size:1rem!important;font-weight:700!important}
+
+/* ═══════ HERO ═══════ */
+#hero{min-height:100vh;display:flex;align-items:center;padding:130px 5% 100px;position:relative;overflow:hidden;background:var(--ink)}
+.hero-bg-grad{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 65% 60% at 85% 40%,rgba(232,51,58,.18),transparent 65%),radial-gradient(ellipse 45% 50% at 5% 90%,rgba(243,107,33,.12),transparent 55%)}
+.hero-grid-lines{position:absolute;inset:0;z-index:0;opacity:.06;background-image:linear-gradient(rgba(245,240,232,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(245,240,232,.6) 1px,transparent 1px);background-size:60px 60px;animation:gridScroll 25s linear infinite}
+@keyframes gridScroll{0%{background-position:0 0}100%{background-position:60px 60px}}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;animation:orbPulse 8s ease-in-out infinite}
+.ho1{width:500px;height:500px;background:var(--red);opacity:.1;top:-15%;right:-8%}
+.ho2{width:320px;height:320px;background:var(--orange);opacity:.08;bottom:-10%;left:3%;animation-delay:3s}
+.ho3{width:180px;height:180px;background:var(--gold);opacity:.07;top:35%;left:38%;animation-delay:6s}
+@keyframes orbPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08) translateY(-15px)}}
+.particle{position:absolute;border-radius:50%;background:var(--red);opacity:.15;pointer-events:none;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(100vh);opacity:0}10%{opacity:.15}90%{opacity:.15}100%{transform:translateY(-80px) translateX(40px);opacity:0}}
+
+/* Property silhouette SVG background */
+.hero-skyline{position:absolute;bottom:0;left:0;right:0;z-index:1;opacity:.07}
+
+.hero-content{position:relative;z-index:2;max-width:640px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(245,240,232,.08);border:1px solid rgba(245,240,232,.15);padding:6px 16px;border-radius:50px;font-size:.74rem;font-weight:600;letter-spacing:.6px;color:rgba(245,240,232,.7);text-transform:uppercase;margin-bottom:28px}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:pulseDot 2s infinite}
+@keyframes pulseDot{0%,100%{box-shadow:0 0 0 0 rgba(232,51,58,.6)}70%{box-shadow:0 0 0 8px rgba(232,51,58,0)}}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5.5vw,5rem);font-weight:900;line-height:1.04;letter-spacing:-2px;color:var(--cream);margin-bottom:22px}
+h1 em{font-style:italic;color:var(--red)}
+.hero-sub{font-size:1.05rem;color:rgba(245,240,232,.6);line-height:1.75;max-width:480px;margin-bottom:38px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;padding:14px 30px;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;display:inline-block;box-shadow:0 6px 24px rgba(232,51,58,.4);transition:transform .25s,box-shadow .25s}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(232,51,58,.55)}
+.btn-secondary{background:rgba(245,240,232,.08);color:var(--cream);padding:13px 28px;border-radius:50px;font-weight:600;font-size:.95rem;text-decoration:none;display:inline-block;border:1.5px solid rgba(245,240,232,.2);transition:background .25s,border-color .25s,transform .25s}
+.btn-secondary:hover{background:rgba(245,240,232,.14);border-color:rgba(245,240,232,.35);transform:translateY(-3px)}
+.hero-right{position:absolute;right:5%;top:50%;transform:translateY(-50%);z-index:2;width:400px}
+
+/* Floating stat cards on hero right */
+.float-stats{display:flex;flex-direction:column;gap:14px}
+.fstat{background:rgba(245,240,232,.06);border:1px solid rgba(245,240,232,.12);backdrop-filter:blur(12px);border-radius:16px;padding:18px 22px;display:flex;align-items:center;gap:14px}
+.fstat-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.fstat-n{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--cream);line-height:1}
+.fstat-n span{color:var(--red)}
+.fstat-l{font-size:.72rem;color:rgba(245,240,232,.5);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+.portal-logos{background:rgba(245,240,232,.06);border:1px solid rgba(245,240,232,.12);backdrop-filter:blur(12px);border-radius:16px;padding:16px 22px}
+.portal-logos-label{font-size:.66rem;color:rgba(245,240,232,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.portal-icons-row{display:flex;gap:8px;flex-wrap:wrap}
+.pi{height:28px;padding:4px 10px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:700;letter-spacing:.3px;white-space:nowrap}
+.pi-99{background:#e8333a;color:#fff}
+.pi-mb{background:#e86b00;color:#fff}
+.pi-hc{background:#d4262c;color:#fff}
+.pi-wa{background:#25d366;color:#fff}
+.pi-meta{background:#1877f2;color:#fff}
+.pi-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
+
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px}
+.scroll-hint span{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35)}
+.scroll-line{width:1px;height:32px;background:linear-gradient(var(--red),transparent);animation:scrollPulse 1.8s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ═══════ SECTIONS SHARED ═══════ */
+section{padding:96px 5%;width:100%}
+.sec-lbl{font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,3rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:14px}
+.sec-sub{color:var(--muted);font-size:1rem;line-height:1.7;max-width:480px;margin-bottom:50px}
+
+/* ═══════ REVEAL ═══════ */
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .75s cubic-bezier(.25,.46,.45,.94),transform .75s cubic-bezier(.25,.46,.45,.94)}
+.reveal.fl{transform:translateX(-46px)}
+.reveal.fr{transform:translateX(46px)}
+.reveal.vis{opacity:1!important;transform:translate(0)!important}
+.stag>*{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+.stag.vis>*:nth-child(1){opacity:1;transform:none;transition-delay:.04s}
+.stag.vis>*:nth-child(2){opacity:1;transform:none;transition-delay:.12s}
+.stag.vis>*:nth-child(3){opacity:1;transform:none;transition-delay:.2s}
+.stag.vis>*:nth-child(4){opacity:1;transform:none;transition-delay:.28s}
+.stag.vis>*:nth-child(5){opacity:1;transform:none;transition-delay:.36s}
+.stag.vis>*:nth-child(6){opacity:1;transform:none;transition-delay:.44s}
+.stag.vis>*:nth-child(n+7){opacity:1;transform:none;transition-delay:.52s}
+
+/* ═══════ CHALLENGE SECTION ═══════ */
+#challenge{background:var(--white)}
+.challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.challenge-list{display:flex;flex-direction:column;gap:16px;margin-top:6px}
+.challenge-item{display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:14px;border:1px solid var(--border);background:var(--card);transition:border-color .3s,transform .3s,box-shadow .3s}
+.challenge-item:hover{border-color:rgba(232,51,58,.25);transform:translateX(6px);box-shadow:0 8px 28px rgba(0,0,0,.06)}
+.ch-icon{font-size:1.5rem;flex-shrink:0;width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,rgba(232,51,58,.1),rgba(243,107,33,.1));display:flex;align-items:center;justify-content:center}
+.ch-title{font-weight:700;font-size:.95rem;margin-bottom:4px}
+.ch-desc{font-size:.84rem;color:var(--muted);line-height:1.6}
+/* Pain number big */
+.pain-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pstat{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;position:relative;overflow:hidden}
+.pstat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.pstat:hover::before{transform:scaleX(1)}
+.pstat-val{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;line-height:1;color:var(--ink);margin-bottom:6px}
+.pstat-val span{color:var(--red)}
+.pstat-label{font-size:.8rem;color:var(--muted);line-height:1.45}
+
+/* ═══════ CRM SECTION ═══════ */
+#crm{background:var(--cream)}
+.crm-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+/* CRM Pipeline visual */
+.crm-visual{background:var(--ink);border-radius:22px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;overflow:hidden}
+.crm-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 10%,rgba(232,51,58,.12),transparent 60%)}
+.cv-topbar{display:flex;align-items:center;gap:7px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.cv-dot{width:9px;height:9px;border-radius:50%}
+.cv-dot:nth-child(1){background:#ff5f57}
+.cv-dot:nth-child(2){background:#ffbd2e}
+.cv-dot:nth-child(3){background:#28ca42}
+.cv-title{font-size:.7rem;font-weight:600;color:rgba(255,255,255,.4);margin-left:6px;letter-spacing:.5px}
+/* Kanban lanes */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.k-lane{}
+.k-head{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.4);margin-bottom:7px;padding:0 2px}
+.k-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px 10px;margin-bottom:7px;transition:background .2s}
+.k-card:hover{background:rgba(255,255,255,.1)}
+.k-card-name{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.k-card-sub{font-size:.6rem;color:rgba(255,255,255,.4)}
+.k-tag{display:inline-block;font-size:.55rem;font-weight:700;padding:1.5px 6px;border-radius:50px;margin-top:4px}
+.kt-hot{background:rgba(232,51,58,.2);color:#f87171}
+.kt-warm{background:rgba(243,107,33,.2);color:#fb923c}
+.kt-new{background:rgba(201,150,44,.2);color:#fbbf24}
+.kt-won{background:rgba(40,202,66,.2);color:#4ade80}
+/* Source badges below kanban */
+.source-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+.src-badge{font-size:.58rem;font-weight:700;padding:3px 8px;border-radius:50px;display:flex;align-items:center;gap:4px}
+.sb-99{background:rgba(232,51,58,.2);color:#f87171}
+.sb-mb{background:rgba(232,107,0,.2);color:#fb923c}
+.sb-hc{background:rgba(212,38,44,.2);color:#fca5a5}
+.sb-wa{background:rgba(37,211,102,.2);color:#4ade80}
+.sb-meta{background:rgba(24,119,242,.2);color:#60a5fa}
+/* CRM feature list */
+.crm-features{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.crm-feat{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:12px;background:var(--white);border:1px solid var(--border);transition:border-color .3s,transform .3s}
+.crm-feat:hover{border-color:rgba(232,51,58,.2);transform:translateX(5px)}
+.cf-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.cf-title{font-weight:700;font-size:.9rem;margin-bottom:3px}
+.cf-desc{font-size:.82rem;color:var(--muted);line-height:1.55}
+.cf-tag{display:inline-block;margin-top:4px;font-size:.6rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--red);padding:1.5px 7px;background:rgba(232,51,58,.08);border-radius:50px}
+
+/* ═══════ PORTALS SECTION ═══════ */
+#portals{background:var(--ink);position:relative;overflow:hidden}
+#portals::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 50%,rgba(232,51,58,.08),transparent 65%)}
+.portals-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.portal-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.portal-card{background:rgba(245,240,232,.04);border:1px solid rgba(245,240,232,.08);border-radius:16px;padding:22px 18px;text-align:center;transition:background .3s,border-color .3s,transform .3s}
+.portal-card:hover{background:rgba(245,240,232,.08);border-color:rgba(232,51,58,.3);transform:translateY(-5px)}
+.portal-logo-box{width:56px;height:56px;border-radius:14px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem;letter-spacing:-.3px}
+.plb-99{background:#e8333a;color:#fff}
+.plb-mb{background:#e86b00;color:#fff}
+.plb-hc{background:#d4262c;color:#fff}
+.plb-wa{background:#25d366;color:#fff}
+.plb-meta{background:#1877f2;color:#fff}
+.plb-ig{background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);color:#fff}
+.portal-name{font-weight:700;font-size:.88rem;color:var(--cream);margin-bottom:4px}
+.portal-desc{font-size:.73rem;color:rgba(245,240,232,.45);line-height:1.5}
+.portal-flow{margin-top:6px}
+.portal-flow-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--cream);margin-bottom:20px}
+.flow-steps{display:flex;flex-direction:column;gap:0}
+.flow-step{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);position:relative}
+.flow-step:last-child{border-bottom:none}
+.flow-step::before{content:'';position:absolute;left:19px;top:48px;bottom:-16px;width:1.5px;background:rgba(232,51,58,.2)}
+.flow-step:last-child::before{display:none}
+.fstep-dot{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.78rem;flex-shrink:0;position:relative;z-index:1;box-shadow:0 4px 14px rgba(232,51,58,.35)}
+.fstep-title{font-size:.88rem;font-weight:700;color:var(--cream);margin-bottom:3px}
+.fstep-desc{font-size:.78rem;color:rgba(245,240,232,.5);line-height:1.5}
+
+/* ═══════ PAYROLL SECTION ═══════ */
+#payroll{background:var(--white)}
+.payroll-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+/* Payroll dashboard visual */
+.payroll-visual{background:linear-gradient(135deg,#f0e8d8,#e8ddd0);border-radius:22px;padding:26px;position:relative}
+.pv-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.pv-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900}
+.pv-month{font-size:.72rem;color:var(--muted);background:var(--white);padding:4px 12px;border-radius:50px;border:1px solid var(--border)}
+.pv-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.pvs-card{background:var(--white);border-radius:12px;padding:14px;text-align:center;border:1px solid var(--border)}
+.pvs-n{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--ink)}
+.pvs-n.red{color:var(--red)}
+.pvs-n.green{color:#16a34a}
+.pvs-l{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.pv-agent-list{}
+.pv-agent-head{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:8px}
+.pv-agent-row{display:flex;align-items:center;gap:10px;background:var(--white);border-radius:10px;padding:10px 12px;margin-bottom:7px;border:1px solid var(--border)}
+.pv-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.65rem;flex-shrink:0}
+.pv-av.g{background:linear-gradient(135deg,#16a34a,#15803d)}
+.pv-av.b{background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+.pv-aname{font-size:.72rem;font-weight:700;flex:1}
+.pv-arole{font-size:.6rem;color:var(--muted)}
+.pv-asalary{font-size:.72rem;font-weight:700;color:var(--red)}
+.pv-astatus{font-size:.58rem;font-weight:700;padding:2px 7px;border-radius:50px}
+.pvs-paid{background:rgba(22,163,74,.1);color:#15803d}
+.pvs-pend{background:rgba(232,51,58,.1);color:var(--red)}
+.pv-commission-bar{background:var(--white);border-radius:12px;padding:14px;border:1px solid var(--border);margin-top:14px}
+.pcb-title{font-size:.72rem;font-weight:700;margin-bottom:10px}
+.pcb-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.pcb-name{font-size:.65rem;color:var(--muted);width:60px;flex-shrink:0}
+.pcb-bar-wrap{flex:1;height:6px;background:var(--border);border-radius:50px;overflow:hidden}
+.pcb-bar{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--red),var(--orange))}
+.pcb-val{font-size:.65rem;font-weight:700;color:var(--red);width:45px;text-align:right}
+/* Payroll feature list */
+.payroll-features{display:flex;flex-direction:column;gap:14px}
+.pay-feat{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:border-color .3s,transform .3s}
+.pay-feat:hover{border-color:rgba(232,51,58,.2);transform:translateX(5px)}
+.pf-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.pf-title{font-weight:700;font-size:.9rem;margin-bottom:3px}
+.pf-desc{font-size:.82rem;color:var(--muted);line-height:1.55}
+
+/* ═══════ KYC SECTION ═══════ */
+#kyc{background:var(--cream);position:relative;overflow:hidden}
+.kyc-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+/* KYC form mockup */
+.kyc-visual{background:var(--white);border-radius:22px;border:1px solid var(--border);padding:28px;box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.kyc-v-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;margin-bottom:6px}
+.kyc-v-sub{font-size:.78rem;color:var(--muted);margin-bottom:22px}
+.kyc-field-group{margin-bottom:14px}
+.kyc-field-label{font-size:.72rem;font-weight:600;color:var(--ink);margin-bottom:5px;display:block}
+.kyc-field{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:9px;padding:10px 14px;font-size:.82rem;color:var(--ink);outline:none}
+.kyc-field:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(232,51,58,.1)}
+.kyc-field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kyc-upload{border:2px dashed var(--border);border-radius:10px;padding:16px;text-align:center;margin-bottom:14px;transition:border-color .3s}
+.kyc-upload:hover{border-color:var(--red)}
+.kyc-upload-icon{font-size:1.5rem;margin-bottom:6px}
+.kyc-upload-text{font-size:.75rem;color:var(--muted)}
+.kyc-upload-text strong{color:var(--red)}
+.kyc-doc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.kyc-chip{padding:4px 12px;border-radius:50px;font-size:.68rem;font-weight:600;border:1.5px solid var(--border);background:var(--card);color:var(--muted)}
+.kyc-chip.active{background:rgba(232,51,58,.08);border-color:rgba(232,51,58,.3);color:var(--red)}
+.kyc-submit{width:100%;background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;border:none;border-radius:50px;padding:13px;font-weight:700;font-size:.9rem;cursor:pointer;box-shadow:0 5px 18px rgba(232,51,58,.35)}
+/* KYC text side */
+.kyc-benefits{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.kyc-ben{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:12px;background:var(--white);border:1px solid var(--border);transition:border-color .3s,transform .3s}
+.kyc-ben:hover{border-color:rgba(232,51,58,.2);transform:translateX(5px)}
+.kb-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.kb-title{font-weight:700;font-size:.9rem;margin-bottom:3px}
+.kb-desc{font-size:.82rem;color:var(--muted);line-height:1.55}
+
+/* ═══════ INDUSTRIES / RESULTS ═══════ */
+#results{background:var(--white)}
+.results-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.rstat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rstat{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.rstat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.rstat:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.08)}
+.rstat:hover::before{transform:scaleX(1)}
+.rstat-val{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;line-height:1;color:var(--ink);margin-bottom:6px}
+.rstat-val span{color:var(--red)}
+.rstat-label{font-size:.8rem;color:var(--muted);line-height:1.45}
+.result-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.result-list li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--muted);line-height:1.6}
+.result-list li::before{content:'→';color:var(--red);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* ═══════ PACKAGES ═══════ */
+#packages{background:var(--cream)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pkg-card{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:32px 28px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s}
+.pkg-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.pkg-card.feat{border-color:rgba(232,51,58,.35);background:linear-gradient(160deg,rgba(232,51,58,.04),var(--white))}
+.pkg-card.feat::before{transform:scaleX(1)}
+.pkg-card:hover{transform:translateY(-6px);box-shadow:0 18px 48px rgba(0,0,0,.1);border-color:rgba(232,51,58,.2)}
+.pkg-badge{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:4px 10px;border-radius:50px;background:rgba(232,51,58,.08);color:var(--red);margin-bottom:16px}
+.pkg-badge.fb{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff}
+.pkg-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;margin-bottom:8px}
+.pkg-price strong{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--ink)}
+.pkg-price span{font-size:.82rem;color:var(--muted);margin-left:4px}
+.pkg-sub{font-size:.78rem;color:var(--muted);margin:6px 0 22px;line-height:1.5}
+.pkg-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+.pkg-features li{display:flex;align-items:flex-start;gap:9px;font-size:.84rem;color:var(--muted);line-height:1.5}
+.pkg-features li::before{content:'✓';color:var(--red);font-weight:700;flex-shrink:0}
+.pkg-cta{display:block;text-align:center;text-decoration:none;padding:13px;border-radius:50px;font-weight:700;font-size:.9rem;transition:transform .2s,box-shadow .2s,background .2s}
+.pkg-cta.p{background:var(--red);color:#fff;box-shadow:0 5px 18px rgba(232,51,58,.32)}
+.pkg-cta.p:hover{transform:translateY(-2px);box-shadow:0 9px 28px rgba(232,51,58,.48)}
+.pkg-cta.o{border:2px solid var(--ink);color:var(--ink)}
+.pkg-cta.o:hover{background:var(--ink);color:var(--cream)}
+.pop-ribbon{position:absolute;top:20px;right:-24px;background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 30px;transform:rotate(35deg);box-shadow:0 3px 10px rgba(232,51,58,.4)}
+
+/* ═══════ TESTIMONIALS ═══════ */
+#testimonials{background:var(--white)}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tc{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.tc:hover{transform:translateY(-5px);box-shadow:0 14px 40px rgba(0,0,0,.09)}
+.tc::before{content:'"';position:absolute;top:-14px;right:18px;font-size:7rem;font-family:'Playfair Display',serif;color:rgba(232,51,58,.06);line-height:1;pointer-events:none}
+.tc-stars{color:var(--gold);font-size:.9rem;margin-bottom:14px;letter-spacing:2px}
+.tc p{font-size:.86rem;color:var(--muted);line-height:1.7;font-style:italic;margin-bottom:18px}
+.tc-author{display:flex;align-items:center;gap:11px}
+.tc-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.84rem;flex-shrink:0}
+.tc-info strong{font-size:.86rem;display:block}
+.tc-info span{font-size:.73rem;color:var(--muted)}
+
+/* ═══════ CONTACT ═══════ */
+#contact{background:var(--card)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.cinfo p{color:var(--muted);line-height:1.7;margin-bottom:28px;font-size:.95rem}
+.cdet{display:flex;gap:14px;align-items:center;margin-bottom:14px;padding:10px;border-radius:12px;transition:background .22s,transform .22s}
+.cdet:hover{background:var(--white);transform:translateX(5px)}
+.cd-icon{width:42px;height:42px;border-radius:11px;background:rgba(232,51,58,.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.cdet:hover .cd-icon{background:var(--red)}
+.cd-txt strong{font-size:.82rem;display:block;margin-bottom:2px}
+.cd-txt span{font-size:.84rem;color:var(--muted)}
+.cform{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:36px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:.8rem;font-weight:600;margin-bottom:7px}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.88rem;background:var(--card);color:var(--ink);outline:none;transition:border-color .22s,box-shadow .22s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(232,51,58,.1);background:#fff}
+.fg textarea{resize:vertical;min-height:105px}
+.fsub{width:100%;padding:14px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 5px 18px rgba(232,51,58,.32);transition:transform .25s,box-shadow .25s}
+.fsub:hover{transform:translateY(-3px);box-shadow:0 9px 30px rgba(232,51,58,.48)}
+
+/* ═══════ FOOTER ═══════ */
+footer{background:var(--ink);color:rgba(245,240,232,.55);padding:60px 5% 28px}
+.ftop{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.fbrand p{margin-top:12px;font-size:.83rem;line-height:1.7;color:rgba(245,240,232,.4)}
+.fcol h5{color:rgba(245,240,232,.88);font-size:.8rem;font-weight:700;margin-bottom:14px;letter-spacing:.5px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.fcol ul a{text-decoration:none;color:rgba(245,240,232,.45);font-size:.82rem;transition:color .22s,transform .22s;display:inline-block}
+.fcol ul a:hover{color:var(--orange);transform:translateX(4px)}
+.fbot{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.78rem}
+
+/* ═══════ TOAST ═══════ */
+.toast{position:fixed;bottom:28px;right:28px;z-index:9999;background:#1a1a1a;color:#fff;padding:14px 22px;border-radius:12px;font-size:.88rem;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.3);transform:translateY(100px) scale(.9);opacity:0;transition:transform .42s cubic-bezier(.175,.885,.32,1.275),opacity .32s;display:flex;align-items:center;gap:9px}
+.toast.show{transform:translateY(0) scale(1);opacity:1}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media(max-width:1024px){
+  .nav-links{display:none}.burger{display:flex}
+  #hero{padding:110px 5% 80px}
+  .hero-right{display:none}
+  h1{letter-spacing:-1px}
+  .challenge-grid,.crm-wrapper,.portals-grid,.payroll-wrapper,.kyc-wrapper,.results-inner,.cgrid{grid-template-columns:1fr;gap:40px}
+  .portal-cards{grid-template-columns:repeat(3,1fr)}
+  .pkg-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+  .t-grid{grid-template-columns:1fr 1fr}
+  .ftop{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:600px){
+  section{padding:72px 4%}
+  nav{padding:14px 4%}
+  h1{font-size:clamp(2.1rem,10vw,2.9rem)}
+  .t-grid{grid-template-columns:1fr}
+  .portal-cards{grid-template-columns:1fr 1fr}
+  .frow{grid-template-columns:1fr}
+  .cform{padding:24px 18px}
+  .ftop{grid-template-columns:1fr}
+  .fbot{flex-direction:column;text-align:center}
+  .kanban{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<div id="prog"></div>
+
+<!-- ══════════════════════════════════
+  NAV
+══════════════════════════════════ -->
+<nav id="nav">
+  <a href="../index.html" class="logo">Zo<span>Sync</span><sub>Real Estate</sub></a>
+  <ul class="nav-links">
+    <li><a href="#crm">CRM</a></li>
+    <li><a href="#portals">Portal Integrations</a></li>
+    <li><a href="#payroll">Payroll</a></li>
+    <li><a href="#kyc">Zoho Forms KYC</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="../index.html" class="nav-back">← Main Site</a></li>
+    <li><a href="#contact" class="nav-cta">Free Demo</a></li>
+  </ul>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="nav-drawer" id="navDrawer">
+  <a href="#crm" class="dl">CRM for Sales</a>
+  <a href="#portals" class="dl">Portal Integrations</a>
+  <a href="#payroll" class="dl">Payroll</a>
+  <a href="#kyc" class="dl">KYC Forms</a>
+  <a href="#packages" class="dl">Packages</a>
+  <a href="../index.html" class="dl" style="font-size:1.1rem;color:var(--muted)">← Main Site</a>
+  <a href="#contact" class="dl dc">Free Demo</a>
+</div>
+
+<!-- ══════════════════════════════════
+  HERO
+══════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-grad"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-orb ho1"></div>
+  <div class="hero-orb ho2"></div>
+  <div class="hero-orb ho3"></div>
+  <div id="particles"></div>
+
+  <!-- Property skyline silhouette -->
+  <svg class="hero-skyline" viewBox="0 0 1440 200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+    <path fill="rgba(245,240,232,1)" d="
+      M0,200 L0,160 L40,160 L40,120 L60,120 L60,100 L80,100 L80,80 L100,80 L100,60 L110,60
+      L110,50 L130,50 L130,60 L150,60 L150,80 L160,80 L160,100 L180,100 L180,120 L200,120 L200,100
+      L220,100 L220,70 L230,65 L240,70 L240,100 L260,100 L260,140 L280,140 L280,90 L290,75 L310,75
+      L310,80 L330,80 L330,90 L350,90 L350,110 L380,110 L380,80 L390,70 L400,65 L410,70 L420,80
+      L420,60 L430,50 L450,50 L450,40 L470,40 L480,30 L490,40 L500,40 L500,50 L520,50 L520,80
+      L540,80 L540,100 L560,100 L560,70 L580,70 L580,90 L600,90 L600,100 L620,100 L620,80 L640,80
+      L640,55 L650,45 L660,55 L660,80 L680,80 L680,100 L700,100 L700,120 L720,120 L720,90 L740,90
+      L740,70 L760,70 L760,85 L780,85 L780,100 L800,100 L800,80 L810,65 L820,55 L830,65 L840,80
+      L840,100 L860,100 L860,80 L880,80 L880,60 L890,50 L910,50 L910,60 L930,60 L930,80 L950,80
+      L950,100 L970,100 L970,120 L990,120 L990,90 L1010,90 L1010,70 L1020,60 L1040,60 L1040,70
+      L1050,80 L1060,70 L1080,70 L1080,90 L1100,90 L1100,60 L1110,50 L1120,40 L1130,50 L1140,60
+      L1160,60 L1160,80 L1180,80 L1180,100 L1200,100 L1200,80 L1220,80 L1220,70 L1240,70 L1240,90
+      L1260,90 L1260,110 L1280,110 L1280,90 L1300,90 L1300,70 L1310,60 L1320,50 L1340,50 L1340,60
+      L1360,60 L1360,80 L1380,80 L1380,100 L1400,100 L1400,120 L1440,120 L1440,200 Z"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-pill"><span class="pulse-dot"></span>Real Estate Automation · India</div>
+    <h1>Stop Losing<br/><em>Property Leads</em><br/>to Follow-Up Gaps.</h1>
+    <p class="hero-sub">Complete Zoho ecosystem for real estate — CRM for your sales team, Payroll for agents, digital KYC, and live integration with 99acres, MagicBricks, Housing.com, WhatsApp &amp; Meta Ads.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get Free Real Estate Demo →</a>
+      <a href="#crm" class="btn-secondary">Explore the Platform</a>
+    </div>
+  </div>
+
+  <!-- Floating stats right side -->
+  <div class="hero-right">
+    <div class="float-stats">
+      <div class="fstat">
+        <div class="fstat-icon">🎯</div>
+        <div>
+          <div class="fstat-n" data-count="3">0<span>×</span></div>
+          <div class="fstat-l">More Leads Converted</div>
+        </div>
+      </div>
+      <div class="fstat">
+        <div class="fstat-icon">⏱️</div>
+        <div>
+          <div class="fstat-n" data-count="90">0<span>%</span></div>
+          <div class="fstat-l">Less Manual Follow-Up</div>
+        </div>
+      </div>
+      <div class="fstat">
+        <div class="fstat-icon">🏠</div>
+        <div>
+          <div class="fstat-n" data-count="150">0<span>+</span></div>
+          <div class="fstat-l">Agencies Automated</div>
+        </div>
+      </div>
+      <div class="portal-logos">
+        <div class="portal-logos-label">Portals &amp; Channels Connected</div>
+        <div class="portal-icons-row">
+          <span class="pi pi-99">99acres</span>
+          <span class="pi pi-mb">MagicBricks</span>
+          <span class="pi pi-hc">Housing</span>
+          <span class="pi pi-wa">WhatsApp</span>
+          <span class="pi pi-meta">Meta</span>
+          <span class="pi pi-ig">Instagram</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ══════════════════════════════════
+  CHALLENGE SECTION
+══════════════════════════════════ -->
+<section id="challenge">
+  <div class="challenge-grid">
+    <div class="reveal fl">
+      <div class="sec-lbl">The Problem</div>
+      <h2 class="sec-title">Real Estate Runs on Leads.<br/>Most Agencies Lose Them.</h2>
+      <p class="sec-sub">Leads from 99acres hit one inbox. WhatsApp enquiries go to an agent's personal phone. Meta Ad leads sit in a spreadsheet. Nobody follows up in time. Deals die.</p>
+      <div class="challenge-list stag">
+        <div class="challenge-item">
+          <div class="ch-icon">📱</div>
+          <div><div class="ch-title">Leads Scattered Across 6 Channels</div><div class="ch-desc">99acres, MagicBricks, Housing.com, WhatsApp, Meta, and Instagram enquiries never land in one place — agents miss them.</div></div>
+        </div>
+        <div class="challenge-item">
+          <div class="ch-icon">⏰</div>
+          <div><div class="ch-title">Follow-Up Happens Too Late (or Never)</div><div class="ch-desc">Leads called after 24 hours convert at 8% vs 40% when called within an hour. No automation means lost revenue every single day.</div></div>
+        </div>
+        <div class="challenge-item">
+          <div class="ch-icon">📊</div>
+          <div><div class="ch-title">No Visibility on Agent Performance</div><div class="ch-desc">Which agent called how many leads? Which portal gives the best ROI? Management has no data — just guesswork.</div></div>
+        </div>
+        <div class="challenge-item">
+          <div class="ch-icon">📝</div>
+          <div><div class="ch-title">KYC Done on Paper, Delayed Closures</div><div class="ch-desc">Paper KYC forms, manual document collection, and slow verification add 5–10 days to every property booking closure.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pain-stats stag reveal fr">
+      <div class="pstat">
+        <div class="pstat-val" data-count="78"><span>%</span></div>
+        <div class="pstat-label">of real estate leads are never followed up within 1 hour — industry average India</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-val">5<span>×</span></div>
+        <div class="pstat-label">more deals closed by agencies using a CRM vs those managing leads on WhatsApp &amp; Excel</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-val">₹12<span>L</span></div>
+        <div class="pstat-label">average lost revenue per month for a 15-agent agency due to missed follow-ups and poor lead routing</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-val">9<span>d</span></div>
+        <div class="pstat-label">average delay added to property booking closures due to manual, paper-based KYC processes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  CRM SECTION
+══════════════════════════════════ -->
+<section id="crm" style="background:var(--cream)">
+  <div class="crm-wrapper">
+    <div class="reveal fl">
+      <div class="crm-visual">
+        <div class="cv-topbar">
+          <div class="cv-dot"></div><div class="cv-dot"></div><div class="cv-dot"></div>
+          <div class="cv-title">Zoho CRM · Real Estate Pipeline · October 2025</div>
+        </div>
+        <div class="kanban">
+          <div class="k-lane">
+            <div class="k-head">New Enquiry</div>
+            <div class="k-card"><div class="k-card-name">Anuj Sharma</div><div class="k-card-sub">₹85L · 3BHK Noida</div><span class="k-tag kt-hot">99acres</span></div>
+            <div class="k-card"><div class="k-card-name">Priya Mehta</div><div class="k-card-sub">₹1.2Cr · Villa Gurgaon</div><span class="k-tag kt-new">Meta Ad</span></div>
+            <div class="k-card"><div class="k-card-name">Rohit Verma</div><div class="k-card-sub">₹55L · 2BHK Pune</div><span class="k-tag kt-warm">WhatsApp</span></div>
+          </div>
+          <div class="k-lane">
+            <div class="k-head">Site Visit</div>
+            <div class="k-card"><div class="k-card-name">Kavita Singh</div><div class="k-card-sub">₹95L · 3BHK Delhi</div><span class="k-tag kt-warm">MagicBricks</span></div>
+            <div class="k-card"><div class="k-card-name">Arjun Nair</div><div class="k-card-sub">₹2.1Cr · Penthouse</div><span class="k-tag kt-hot">Housing.com</span></div>
+          </div>
+          <div class="k-lane">
+            <div class="k-head">Negotiation</div>
+            <div class="k-card"><div class="k-card-name">Sunita Reddy</div><div class="k-card-sub">₹1.45Cr · 4BHK</div><span class="k-tag kt-warm">Instagram</span></div>
+            <div class="k-card"><div class="k-card-name">Dev Kapoor</div><div class="k-card-sub">₹78L · 2BHK Thane</div><span class="k-tag kt-hot">99acres</span></div>
+          </div>
+          <div class="k-lane">
+            <div class="k-head">Deal Won ✓</div>
+            <div class="k-card"><div class="k-card-name">Neha Agarwal</div><div class="k-card-sub">₹1.8Cr · 3BHK</div><span class="k-tag kt-won">Closed</span></div>
+            <div class="k-card"><div class="k-card-name">Vikram Tiwari</div><div class="k-card-sub">₹62L · 2BHK</div><span class="k-tag kt-won">Closed</span></div>
+          </div>
+        </div>
+        <div class="source-row">
+          <span class="src-badge sb-99">🏠 99acres</span>
+          <span class="src-badge sb-mb">🟠 MagicBricks</span>
+          <span class="src-badge sb-hc">🔴 Housing.com</span>
+          <span class="src-badge sb-wa">💬 WhatsApp</span>
+          <span class="src-badge sb-meta">🔵 Meta Leads</span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal fr">
+      <div class="sec-lbl">CRM for Sales Teams</div>
+      <h2 class="sec-title">Every Lead. Every Agent.<br/>One Real Estate CRM.</h2>
+      <p class="sec-sub">Zoho CRM configured specifically for how real estate teams sell — from first portal enquiry to site visit booking, negotiation, and deal closure.</p>
+      <div class="crm-features stag">
+        <div class="crm-feat">
+          <div class="cf-icon">📥</div>
+          <div><div class="cf-title">All Portals → Single Pipeline</div><div class="cf-desc">Leads from 99acres, MagicBricks, Housing.com, Meta Ads, WhatsApp, and website forms land in one Zoho CRM pipeline — auto-assigned to the right agent.</div><span class="cf-tag">Auto-Import</span></div>
+        </div>
+        <div class="crm-feat">
+          <div class="cf-icon">⚡</div>
+          <div><div class="cf-title">1-Hour Auto Follow-Up</div><div class="cf-desc">When a new lead arrives, Zoho CRM automatically sends a WhatsApp message, creates a call task, and alerts the assigned agent — all within 60 seconds.</div><span class="cf-tag">Instant Response</span></div>
+        </div>
+        <div class="crm-feat">
+          <div class="cf-icon">🗺️</div>
+          <div><div class="cf-title">Property-Matched Pipeline</div><div class="cf-desc">Custom pipeline stages for real estate — New Enquiry → Site Visit Booked → Site Visited → Negotiation → Booking Done. Blueprint enforces every step.</div><span class="cf-tag">Industry-Built</span></div>
+        </div>
+        <div class="crm-feat">
+          <div class="cf-icon">📊</div>
+          <div><div class="cf-title">Agent Performance Dashboard</div><div class="cf-desc">See each agent's calls made, site visits booked, deals closed, and conversion rate. Know exactly which portals give you the best ROI every week.</div><span class="cf-tag">Full Visibility</span></div>
+        </div>
+        <div class="crm-feat">
+          <div class="cf-icon">💬</div>
+          <div><div class="cf-title">WhatsApp Inside CRM</div><div class="cf-desc">Two-way WhatsApp Business conversations logged against every contact. Agents never leave CRM — every message, every follow-up, all tracked automatically.</div><span class="cf-tag">WhatsApp CRM</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  PORTAL INTEGRATIONS
+══════════════════════════════════ -->
+<section id="portals">
+  <div class="portals-grid">
+    <div class="reveal fl">
+      <div class="sec-lbl">Portal &amp; Channel Integrations</div>
+      <h2 class="sec-title" style="color:var(--cream)">6 Lead Sources.<br/><span style="color:var(--red)">One CRM.</span><br/>Zero Leakage.</h2>
+      <p class="sec-sub" style="color:rgba(245,240,232,.55)">Every portal you advertise on, every ad channel you run — all leads flow directly into Zoho CRM, auto-assigned, auto-messaged, and ready for follow-up before you even open your laptop.</p>
+      <div class="portal-flow reveal">
+        <div class="portal-flow-title">How Lead Flow Works</div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="fstep-dot">1</div>
+            <div><div class="fstep-title">Lead Generated on Any Portal</div><div class="fstep-desc">Enquiry on 99acres, form fill on Housing.com, Meta Lead Ad, WhatsApp message, or Instagram DM</div></div>
+          </div>
+          <div class="flow-step">
+            <div class="fstep-dot">2</div>
+            <div><div class="fstep-title">Auto-Imported to Zoho CRM</div><div class="fstep-desc">Lead lands in CRM within 60 seconds via API/webhook. Tagged by source, property type, and budget</div></div>
+          </div>
+          <div class="flow-step">
+            <div class="fstep-dot">3</div>
+            <div><div class="fstep-title">Auto-Assigned to Agent</div><div class="fstep-desc">Round-robin or territory-based assignment routes each lead to the right salesperson instantly</div></div>
+          </div>
+          <div class="flow-step">
+            <div class="fstep-dot">4</div>
+            <div><div class="fstep-title">Instant WhatsApp + Call Alert</div><div class="fstep-desc">Automated WhatsApp message sent to lead. Agent receives call task and notification on mobile</div></div>
+          </div>
+          <div class="flow-step">
+            <div class="fstep-dot">5</div>
+            <div><div class="fstep-title">Full Pipeline Tracking</div><div class="fstep-desc">Every interaction logged. Management sees live portal ROI, agent performance, and conversion rates</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal fr">
+      <div class="portal-cards stag">
+        <div class="portal-card">
+          <div class="portal-logo-box plb-99">99<br/>acres</div>
+          <div class="portal-name">99acres</div>
+          <div class="portal-desc">API integration. All enquiries → CRM in &lt;60 seconds</div>
+        </div>
+        <div class="portal-card">
+          <div class="portal-logo-box plb-mb">Magic<br/>Bricks</div>
+          <div class="portal-name">MagicBricks</div>
+          <div class="portal-desc">Webhook-based lead capture with property tagging</div>
+        </div>
+        <div class="portal-card">
+          <div class="portal-logo-box plb-hc">Hous<br/>ing</div>
+          <div class="portal-name">Housing.com</div>
+          <div class="portal-desc">Real-time lead sync with budget &amp; location filters</div>
+        </div>
+        <div class="portal-card">
+          <div class="portal-logo-box plb-wa">WA</div>
+          <div class="portal-name">WhatsApp Business</div>
+          <div class="portal-desc">Two-way CRM messaging. Every chat logged automatically</div>
+        </div>
+        <div class="portal-card">
+          <div class="portal-logo-box plb-meta">f</div>
+          <div class="portal-name">Meta Lead Ads</div>
+          <div class="portal-desc">Facebook &amp; Instagram Lead Ads → Zoho CRM instantly</div>
+        </div>
+        <div class="portal-card">
+          <div class="portal-logo-box plb-ig">📷</div>
+          <div class="portal-name">Instagram DMs</div>
+          <div class="portal-desc">Story replies and DM enquiries captured as CRM leads</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  PAYROLL SECTION
+══════════════════════════════════ -->
+<section id="payroll">
+  <div class="payroll-wrapper">
+    <div class="reveal fl">
+      <div class="sec-lbl">Payroll for Real Estate Agents</div>
+      <h2 class="sec-title">Commission, Incentives &amp;<br/>Payroll — All Automated.</h2>
+      <p class="sec-sub">Real estate payroll is complex — fixed salary + variable commissions + incentives per deal closed. Zoho People + Zoho Payroll handles all of it automatically, connected to your CRM deal data.</p>
+      <div class="payroll-features stag">
+        <div class="pay-feat">
+          <div class="pf-icon">💰</div>
+          <div><div class="pf-title">Auto-Commission Calculation</div><div class="pf-desc">When a deal is marked Closed in Zoho CRM, the commission is automatically calculated and added to the agent's payroll for that month. Zero manual entry.</div></div>
+        </div>
+        <div class="pay-feat">
+          <div class="pf-icon">📅</div>
+          <div><div class="pf-title">Leave & Attendance Management</div><div class="pf-desc">Zoho People tracks agent attendance, leave balances, and field visits. LOP deductions sync automatically to payroll — no HR chasing agents for attendance sheets.</div></div>
+        </div>
+        <div class="pay-feat">
+          <div class="pf-icon">📊</div>
+          <div><div class="pf-title">Incentive Slabs & Targets</div><div class="pf-desc">Configure incentive slabs based on deals closed per month. 3 closures = 5% bonus. 5+ closures = 10% bonus. Zoho Payroll calculates and pays automatically.</div></div>
+        </div>
+        <div class="pay-feat">
+          <div class="pf-icon">🧾</div>
+          <div><div class="pf-title">Payslips & TDS Compliance</div><div class="pf-desc">Digital payslips auto-generated and shared with every agent via self-service portal. TDS deductions, Form 16, and PF/ESI compliance handled automatically.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal fr">
+      <div class="payroll-visual">
+        <div class="pv-header">
+          <div class="pv-title">Agent Payroll Dashboard</div>
+          <div class="pv-month">October 2025</div>
+        </div>
+        <div class="pv-summary">
+          <div class="pvs-card"><div class="pvs-n" data-count="24">0</div><div class="pvs-l">Total Agents</div></div>
+          <div class="pvs-card"><div class="pvs-n green">₹18.4L</div><div class="pvs-l">Payroll Total</div></div>
+          <div class="pvs-card"><div class="pvs-n red">₹6.2L</div><div class="pvs-l">Commissions</div></div>
+        </div>
+        <div class="pv-agent-head">Agent Commission Status</div>
+        <div class="pv-agent-row"><div class="pv-av">RS</div><div><div class="pv-aname">Rahul Singh</div><div class="pv-arole">Senior Agent · 4 deals</div></div><div class="pv-asalary">₹92,000</div><span class="pv-astatus pvs-paid">Paid</span></div>
+        <div class="pv-agent-row"><div class="pv-av g">PD</div><div><div class="pv-aname">Priya Dubey</div><div class="pv-arole">Agent · 2 deals</div></div><div class="pv-asalary">₹54,000</div><span class="pv-astatus pvs-paid">Paid</span></div>
+        <div class="pv-agent-row"><div class="pv-av b">AK</div><div><div class="pv-aname">Arjun Khanna</div><div class="pv-arole">Agent · 1 deal</div></div><div class="pv-asalary">₹38,000</div><span class="pv-astatus pvs-pend">Pending</span></div>
+        <div class="pv-agent-row"><div class="pv-av">NV</div><div><div class="pv-aname">Neha Verma</div><div class="pv-arole">Senior Agent · 5 deals</div></div><div class="pv-asalary">₹1,18,000</div><span class="pv-astatus pvs-paid">Paid</span></div>
+        <!-- Commission bar chart -->
+        <div class="pv-commission-bar">
+          <div class="pcb-title">Commission vs Target</div>
+          <div class="pcb-row"><span class="pcb-name">Rahul S</span><div class="pcb-bar-wrap"><div class="pcb-bar" style="width:80%"></div></div><span class="pcb-val">₹52K</span></div>
+          <div class="pcb-row"><span class="pcb-name">Neha V</span><div class="pcb-bar-wrap"><div class="pcb-bar" style="width:100%"></div></div><span class="pcb-val">₹68K</span></div>
+          <div class="pcb-row"><span class="pcb-name">Priya D</span><div class="pcb-bar-wrap"><div class="pcb-bar" style="width:55%"></div></div><span class="pcb-val">₹34K</span></div>
+          <div class="pcb-row"><span class="pcb-name">Arjun K</span><div class="pcb-bar-wrap"><div class="pcb-bar" style="width:38%"></div></div><span class="pcb-val">₹18K</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  KYC SECTION
+══════════════════════════════════ -->
+<section id="kyc">
+  <div class="kyc-wrapper">
+    <div class="reveal fl">
+      <div class="sec-lbl">Zoho Forms KYC</div>
+      <h2 class="sec-title">Digital KYC That Cuts<br/>Booking Time from 9 Days<br/>to 9 Hours.</h2>
+      <p class="sec-sub">Replace paper forms and email document chains with a branded Zoho Form that collects all KYC details, Aadhaar, PAN, and property documents digitally — linked directly to the buyer's CRM record.</p>
+      <div class="kyc-benefits stag">
+        <div class="kyc-ben">
+          <div class="kb-icon">📋</div>
+          <div><div class="kb-title">Custom KYC Form for Each Project</div><div class="kb-desc">Separate branded Zoho Forms for each property project — residential, commercial, plotted. Collects all buyer details, co-applicant info, and financial documents.</div></div>
+        </div>
+        <div class="kyc-ben">
+          <div class="kb-icon">📂</div>
+          <div><div class="kb-title">Document Upload in the Form</div><div class="kb-desc">Buyers upload Aadhaar, PAN, bank statements, ITR, and passport photos directly in the form. Files auto-attached to the CRM lead record.</div></div>
+        </div>
+        <div class="kyc-ben">
+          <div class="kb-icon">🔄</div>
+          <div><div class="kb-title">Auto-Synced to CRM & WhatsApp</div><div class="kb-desc">When KYC is submitted, the CRM deal moves to "KYC Received" stage automatically. A WhatsApp acknowledgment is sent to the buyer instantly.</div></div>
+        </div>
+        <div class="kyc-ben">
+          <div class="kb-icon">✅</div>
+          <div><div class="kb-title">Sales Manager Approval Workflow</div><div class="kb-desc">KYC submitted → sales manager receives approval task → one-click approve or request additional documents. Entire process tracked with timestamps.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal fr">
+      <!-- KYC Form mockup -->
+   <div class="kyc-visual" style="position: relative;">
+  
+  <span class="sample-badge">Sample Form</span>
+
+  <div class="kyc-v-title">Buyer KYC Form — Skyline Residences</div>
+  <div class="kyc-v-sub">Please fill all fields. Documents can be uploaded below.</div>
+
+  <div class="kyc-field-row">
+    <div class="kyc-field-group">
+      <label class="kyc-field-label">Full Name *</label>
+      <input class="kyc-field" type="text" placeholder="Anuj Sharma" readonly/>
+    </div>
+    <div class="kyc-field-group">
+      <label class="kyc-field-label">Date of Birth *</label>
+      <input class="kyc-field" type="text" placeholder="12 / 04 / 1985" readonly/>
+    </div>
+  </div>
+
+  <div class="kyc-field-row">
+    <div class="kyc-field-group">
+      <label class="kyc-field-label">Aadhaar Number *</label>
+      <input class="kyc-field" type="text" placeholder="XXXX – XXXX – 4218" readonly/>
+    </div>
+    <div class="kyc-field-group">
+      <label class="kyc-field-label">PAN Number *</label>
+      <input class="kyc-field" type="text" placeholder="ABCPS1234D" readonly/>
+    </div>
+  </div>
+
+  <div class="kyc-field-group">
+    <label class="kyc-field-label">Property Unit *</label>
+    <select class="kyc-field">
+      <option>A-1204 · 3BHK · ₹1.45 Cr</option>
+      <option>B-803 · 2BHK · ₹85L</option>
+    </select>
+  </div>
+
+  <div style="font-size:.72rem;font-weight:600;margin-bottom:8px">Documents Required</div>
+
+  <div class="kyc-doc-chips">
+    <span class="kyc-chip active">✓ Aadhaar</span>
+    <span class="kyc-chip active">✓ PAN Card</span>
+    <span class="kyc-chip">Bank Statement</span>
+    <span class="kyc-chip">ITR 2 Years</span>
+    <span class="kyc-chip">Photo</span>
+  </div>
+
+  <div class="kyc-upload">
+    <div class="kyc-upload-icon">📎</div>
+    <div class="kyc-upload-text">
+      Drag &amp; drop or <strong>click to upload</strong><br/>
+      <span style="font-size:.65rem;color:var(--muted)">PDF, JPG, PNG · Max 5MB each</span>
+    </div>
+  </div>
+
+  <button class="kyc-submit">Submit KYC → Auto-Update CRM</button>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  RESULTS
+══════════════════════════════════ -->
+<section id="results">
+  <div class="results-inner">
+    <div class="rstat-grid stag">
+      <div class="rstat"><div class="rstat-val" data-count="3">0<span>×</span></div><div class="rstat-label">More deals closed within 60 days of going live with Zoho CRM</div></div>
+      <div class="rstat"><div class="rstat-val" data-count="90">0<span>%</span></div><div class="rstat-label">Reduction in manual follow-up work — agents spend time selling, not managing lists</div></div>
+      <div class="rstat"><div class="rstat-val" data-count="9">0<span>hr</span></div><div class="rstat-label">Average KYC completion time after switching from paper to Zoho Forms</div></div>
+      <div class="rstat">
+  <div class="rstat-val" data-count="150">0<span>+</span></div>
+  <div class="rstat-label">Indian Real Estate Portfolios & Agencies Digitalized by ZoSync</div>
+</div>
+    </div>
+    <div class="reveal fr">
+      <div class="sec-lbl">After ZoSync Implementation</div>
+      <h2 class="sec-title">What Changes in the First 60 Days</h2>
+      <p class="sec-sub">Real estate companies that go live with our Zoho stack consistently see these improvements within 60 days.</p>
+      <ul class="result-list">
+        <li>Every portal lead captured automatically — no lead ever gets lost in a DM again</li>
+        <li>Agents called 100% of leads within 1 hour — conversion rate jumps immediately</li>
+        <li>Management sees which portals ROI — stop spending on 99acres if Housing converts better</li>
+        <li>Payroll processed in hours, not 3 days — zero commission calculation disputes</li>
+        <li>KYC collected digitally in hours — bookings close 9 days faster on average</li>
+        <li>Agents motivated with real-time commission dashboards — attrition drops</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  PACKAGES
+══════════════════════════════════ -->
+<section id="packages">
+  <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto 50px">
+    <div class="sec-lbl">Implementation Packages</div>
+    <h2 class="sec-title">Real Estate Automation Packages</h2>
+    <p style="color:var(--muted);font-size:1rem;line-height:1.7">Fixed-scope, transparent pricing. You know the full cost before we start. Go live in 5–14 days.</p>
+  </div>
+  <div class="pkg-grid stag">
+
+    <div class="pkg-card">
+      <div class="pkg-badge">Starter</div>
+      <div class="pkg-name">CRM Essentials</div>
+      <div class="pkg-price"><strong>₹55,000</strong><span>one-time</span></div>
+      <div class="pkg-sub">For agencies getting off WhatsApp and Excel lead tracking</div>
+      <ul class="pkg-features">
+        <li>Zoho CRM setup for real estate</li>
+        <li>Custom pipeline — Enquiry to Closure</li>
+        <li>2 portal integrations (e.g. 99acres + Meta)</li>
+        <li>WhatsApp Business CRM connection</li>
+        <li>Lead auto-assignment rules</li>
+        <li>1-hour auto follow-up workflow</li>
+        <li>Agent performance dashboard</li>
+        <li>2-hour team training</li>
+        <li>30-day support</li>
+      </ul>
+      <a href="#contact" class="pkg-cta o">Get Started →</a>
+    </div>
+
+    <div class="pkg-card feat">
+      <div class="pop-ribbon">Popular</div>
+      <div class="pkg-badge fb">Most Popular</div>
+      <div class="pkg-name">Full Stack RE</div>
+      <div class="pkg-price"><strong>₹85,000</strong><span>one-time</span></div>
+      <div class="pkg-sub">CRM + All portal integrations + Payroll + KYC Forms</div>
+      <ul class="pkg-features">
+        <li>Everything in CRM Essentials</li>
+        <li>All portal integrations configured</li>
+        <li>Zoho People — leave &amp; attendance</li>
+        <li>Zoho Payroll — commission slabs</li>
+        <li>Zoho Forms KYC — project-specific</li>
+        <li>Document collection workflow</li>
+        <li>KYC → CRM auto-sync</li>
+        <li>Management analytics dashboard</li>
+        <li>Full-day team training</li>
+        <li>30-day post-launch support</li>
+      </ul>
+      <a href="#contact" class="pkg-cta p">Get Started →</a>
+    </div>
+
+    <div class="pkg-card">
+      <div class="pkg-badge">Enterprise</div>
+      <div class="pkg-name">Developer / Builder</div>
+      <div class="pkg-price"><strong>Custom</strong></div>
+      <div class="pkg-sub">For builders, developers &amp; multi-project agencies</div>
+      <ul class="pkg-features">
+        <li>Everything in Full Stack RE</li>
+        <li>Multi-project CRM setup</li>
+        <li>Custom buyer portal (Zoho Creator)</li>
+        <li>Payment milestone tracking</li>
+        <li>Construction progress updates</li>
+        <li>Broker/channel partner management</li>
+        <li>Advanced Deluge custom scripting</li>
+        <li>RERA compliance reports</li>
+        <li>On-site training sessions</li>
+        <li>12-month AMC contract</li>
+      </ul>
+      <a href="#contact" class="pkg-cta o">Get a Quote →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  TESTIMONIALS
+══════════════════════════════════ -->
+<section id="testimonials" style="background:var(--white)">
+  <div class="reveal" style="text-align:center;margin-bottom:48px">
+    <div class="sec-lbl">Client Reviews</div>
+    <h2 class="sec-title">Real Estate Companies That Scaled with ZoSync</h2>
+  </div>
+  <div class="t-grid stag">
+    <div class="tc">
+      <div class="tc-stars">★★★★★</div>
+      <p>"Before ZoSync set up our Zoho CRM, leads from 99acres and Housing.com were going to 3 different agents' phones. Now every lead lands in one place, auto-assigned, and gets a WhatsApp message in 30 seconds. Our conversion rate went from 4% to 11%."</p>
+      <div class="tc-author"><div class="tc-av">RB</div><div class="tc-info"><strong>Rahul Bhatia</strong><span>MD, Prime Properties — Noida</span></div></div>
+    </div>
+    <div class="tc">
+      <div class="tc-stars">★★★★★</div>
+      <p>"The payroll automation was the biggest win for us. We have 28 agents with different commission slabs. Every month-end was 3 days of manual calculation and arguments. Now Zoho Payroll runs it automatically from CRM data. Zero disputes in 8 months."</p>
+      <div class="tc-author"><div class="tc-av">SK</div><div class="tc-info"><strong>Santosh Kumar</strong><span>Director, Landmark Realty — Pune</span></div></div>
+    </div>
+    <div class="tc">
+      <div class="tc-stars">★★★★★</div>
+      <p>"Digital KYC alone saved us 7–10 days per booking closure. Buyers fill the Zoho Form from their phone, upload documents, and it all goes straight to CRM. Our sales cycle went from 45 days to 28 days. ZoSync understood real estate — he didn't treat us like a generic IT project."</p>
+      <div class="tc-author"><div class="tc-av">AP</div><div class="tc-info"><strong>Anita Prasad</strong><span>CEO, Horizon Homes — Hyderabad</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  CONTACT
+══════════════════════════════════ -->
+<section id="contact">
+  <div class="cgrid">
+    <div class="cinfo reveal fl">
+      <div class="sec-lbl">Free Real Estate Demo</div>
+      <h2 class="sec-title">Let's Build Your Real Estate Automation Stack.</h2>
+      <p>Tell me about your agency — how many agents, which portals you list on, and what's broken in your current process. I'll show you exactly what your Zoho real estate system would look like.</p>
+      <div class="cdet"><div class="cd-icon">📧</div><div class="cd-txt"><strong>Email</strong><span>sales@zosync.in</span></div></div>
+      <div class="cdet"><div class="cd-icon">📱</div><div class="cd-txt"><strong>WhatsApp / Phone</strong><span>+91 9818353936</span></div></div>
+      <div class="cdet"><div class="cd-icon">📍</div><div class="cd-txt"><strong>Location</strong><span>India — Remote &amp; On-site available</span></div></div>
+      <div class="cdet"><div class="cd-icon">⚡</div><div class="cd-txt"><strong>Go-Live Time</strong><span>5–14 days depending on package</span></div></div>
+      <div style="margin-top:24px;padding:20px;background:var(--white);border:1px solid var(--border);border-radius:14px">
+        <div style="font-size:.8rem;font-weight:700;color:var(--ink);margin-bottom:10px">💡 On the free demo you'll get:</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:.82rem;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span>A live walkthrough of Zoho CRM configured for real estate</li>
+          <li style="font-size:.82rem;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span>Integration demo with 99acres/Meta leads flowing into CRM</li>
+          <li style="font-size:.82rem;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span>Fixed-price quote with 7-day go-live timeline</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reveal fr">
+      <div class="cform">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;margin-bottom:22px">Book Your Free Real Estate Demo</h3>
+        <div class="frow">
+          <div class="fg"><label>First Name *</label><input type="text" id="fname" placeholder="Rahul"/></div>
+          <div class="fg"><label>Last Name *</label><input type="text" id="lname" placeholder="Sharma"/></div>
+        </div>
+        <div class="fg"><label>Business Email *</label><input type="email" id="email" placeholder="rahul@agency.com"/></div>
+        <div class="fg"><label>WhatsApp / Phone *</label><input type="tel" id="phone" placeholder="+91 98XXX XXXXX"/></div>
+        <div class="fg"><label>Agency / Company Name</label><input type="text" id="company" placeholder="Prime Properties"/></div>
+        <div class="fg">
+          <label>Number of Sales Agents</label>
+          <select id="team-size">
+            <option value="">Select team size...</option>
+            <option>Solo / 1–3 agents</option>
+            <option>Small team · 4–10 agents</option>
+            <option>Mid-size · 11–30 agents</option>
+            <option>Large · 30–100 agents</option>
+            <option>Enterprise · 100+ agents</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Which portals do you currently use?</label>
+          <select id="portals-used">
+            <option value="">Select portals...</option>
+            <option>99acres &amp; MagicBricks</option>
+            <option>99acres, MagicBricks &amp; Housing.com</option>
+            <option>All major portals + Meta Ads</option>
+            <option>Only Meta &amp; Instagram Ads</option>
+            <option>WhatsApp-based only</option>
+            <option>Other combination</option>
+          </select>
+        </div>
+        <div class="fg"><label>Tell me about your current lead process *</label><textarea id="message" placeholder="e.g. We have 18 agents across 2 offices in Noida. Leads come from 99acres, WhatsApp and some Meta ads. We lose track of follow-ups constantly. Payroll is done manually and takes 4 days every month..."></textarea></div>
+        <button class="fsub" onclick="submitForm()">Book Free Real Estate Demo →</button>
+        <p style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:10px">No spam. No hard sell. Just a ZoSync engineer showing you how to scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  FOOTER
+══════════════════════════════════ -->
+<footer>
+  <div class="ftop">
+    <div class="fbrand">
+      <a href="../index.html" class="logo" style="color:rgba(245,240,232,.88)">Zo<span style="color:var(--red)">Sync</span></a>
+      <p>High-velocity Zoho PropTech implementation by ZoSync. We provide end-to-end automation for Indian real estate developers—integrating CRM, payroll, KYC verification, and seamless portal lead-syncing.</p>
+    </div>
+    <div class="fcol">
+      <h5>Real Estate Solutions</h5>
+      <ul>
+        <li><a href="#crm">CRM for Sales Teams</a></li>
+        <li><a href="#portals">99acres Integration</a></li>
+        <li><a href="#portals">MagicBricks Integration</a></li>
+        <li><a href="#portals">Meta Leads → CRM</a></li>
+        <li><a href="#portals">WhatsApp CRM</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>HR &amp; Payroll</h5>
+      <ul>
+        <li><a href="#payroll">Agent Commission Payroll</a></li>
+        <li><a href="#payroll">Leave Management</a></li>
+        <li><a href="#payroll">Incentive Automation</a></li>
+        <li><a href="#kyc">Digital KYC Forms</a></li>
+        <li><a href="#kyc">Document Collection</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#packages">Packages &amp; Pricing</a></li>
+        <li><a href="#testimonials">Client Reviews</a></li>
+        <li><a href="zoho-amc.html">AMC Support Plans</a></li>
+        <li><a href="zoho-people.html">Zoho People HR</a></li>
+        <li><a href="../index.html">← Main Website</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© 2026 ZoSync. All rights reserved. | Expert Zoho Implementation & Consulting</span>
+    <span>Built for real estate teams that close more deals</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Scroll Progress ──
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('prog').style.width=(window.scrollY/h*100)+'%';
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+},{passive:true});
+
+// ── Burger Menu ──
+const burger=document.getElementById('burger'),drawer=document.getElementById('navDrawer');
+burger.addEventListener('click',()=>{
+  burger.classList.toggle('open');
+  drawer.classList.toggle('open');
+  document.body.style.overflow=drawer.classList.contains('open')?'hidden':'';
+});
+document.querySelectorAll('.dl').forEach(a=>a.addEventListener('click',()=>{
+  burger.classList.remove('open');drawer.classList.remove('open');document.body.style.overflow='';
+}));
+
+// ── Smooth Scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-64,behavior:'smooth'});}
+  });
+});
+
+// ── Particles ──
+const pc=document.getElementById('particles');
+for(let i=0;i<16;i++){
+  const p=document.createElement('div');p.className='particle';
+  const s=(Math.random()*3+2)+'px',dur=(Math.random()*12+8);
+  p.style.cssText=`left:${Math.random()*100}%;width:${s};height:${s};animation-duration:${dur}s;animation-delay:-${Math.random()*dur}s;position:absolute`;
+  pc.appendChild(p);
+}
+
+// ── Parallax orbs ──
+if(window.innerWidth>1024){
+  document.addEventListener('mousemove',e=>{
+    const x=(e.clientX/innerWidth-.5)*18,y=(e.clientY/innerHeight-.5)*18;
+    document.querySelectorAll('.hero-orb').forEach((o,i)=>{
+      const s=[1.2,.8,.5][i]||.6;
+      o.style.transform=`translate(${x*s}px,${y*s}px)`;
+    });
+  });
+}
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  const g=document.querySelector('.hero-grid-lines');
+  if(g)g.style.transform=`translateY(${y*.2}px)`;
+},{passive:true});
+
+// ── IntersectionObserver ──
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.stag').forEach(el=>obs.observe(el));
+
+// ── Counter Animation ──
+const cobs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){animCount(e.target);cobs.unobserve(e.target);}});
+},{threshold:.4});
+document.querySelectorAll('[data-count]').forEach(el=>cobs.observe(el));
+function animCount(el){
+  const target=+el.dataset.count;
+  const suf=el.querySelector('span')?el.querySelector('span').outerHTML:'';
+  let s=null;
+  const step=ts=>{
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/1600,1),ease=1-Math.pow(1-p,4);
+    el.innerHTML=Math.floor(ease*target)+suf;
+    if(p<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// ── Form Submit ──
+async function submitForm(){
+  const fn=document.getElementById('fname').value.trim();
+  const ln=document.getElementById('lname').value.trim();
+  const em=document.getElementById('email').value.trim();
+  const ph=document.getElementById('phone').value.trim();
+  const msg=document.getElementById('message').value.trim();
+  const co=document.getElementById('company').value.trim();
+  const ts=document.getElementById('team-size').value;
+  const pu=document.getElementById('portals-used').value;
+
+  if(!fn||!em||!ph||!msg){showToast('Please fill all required fields.','⚠️','#c0392b');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showToast('Please enter a valid email.','⚠️','#c0392b');return;}
+
+  const body=`New Real Estate Demo Booking:\n\nName: ${fn} ${ln}\nEmail: ${em}\nPhone: ${ph}\nAgency: ${co||'N/A'}\nTeam Size: ${ts||'N/A'}\nPortals Used: ${pu||'N/A'}\n\nMessage:\n${msg}`;
+
+  showToast("Demo booked! I'll reach out within 4–6 hours.",'✅','#1a1a1a');
+  document.querySelectorAll('#contact input,#contact select,#contact textarea').forEach(el=>el.value='');
+  await sendmail(body,`${fn} ${ln}`);
+}
+
+async function sendmail(body,name){
+  try{
+    await fetch('https://zosync-backend-ecxcjq90v-kunwarpal621311s-projects.vercel.app/api/send-email',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({receiverEmail:'sales@zosync.in',subject:'Real Estate Demo: '+name,message:body})
+    });
+  }catch(e){console.error(e);}
+}
+
+function showToast(msg,icon,bg){
+  const t=document.getElementById('toast');
+  t.style.background=bg||'#1a1a1a';
+  t.innerHTML=`<span style="font-size:1.1rem">${icon||'✅'}</span>&nbsp;${msg}`;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),4500);
+}
+
+// ── Cursor ──
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+if(window.innerWidth>1024){
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}},{passive:true});
+  (function lr(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;if(ring){ring.style.left=rx+'px';ring.style.top=ry+'px';}requestAnimationFrame(lr);})();
+  document.querySelectorAll('a,button,.pkg-cta,.portal-card,.challenge-item,.crm-feat,.pay-feat,.kyc-ben,.k-card,.pv-agent-row,.tc').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{if(cur){cur.style.width='6px';cur.style.height='6px';}if(ring){ring.style.width='58px';ring.style.height='58px';ring.style.borderColor='rgba(232,51,58,.7)';}});
+    el.addEventListener('mouseleave',()=>{if(cur){cur.style.width='12px';cur.style.height='12px';}if(ring){ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(232,51,58,.4)';}});
+  });
+}
+</script>
+
+<script>window.$zoho=window.$zoho||{};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script>
+<script id="zsiqscript" src="https://salesiq.zohopublic.in/widget?wc=siq3afbd1162f887c19bbc2d70c50f3b1a241c6ec0b7930abd32b6d5c11e25fb45c" defer></script>
+
+</body>
+</html>
